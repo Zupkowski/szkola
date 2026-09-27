@@ -1,0 +1,75 @@
+// https://mendela.pl/2026/ap_kli/
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="test.js"></script>
+    <script>
+        console.log("head");
+    </script>
+</head>
+
+<body>
+    <div id="imie">Maciej</div>
+    <script>
+        let el = document.getElementById("imie")
+        console.log(el.innerText)
+        const NAZWISKO = "Mende";
+        document.write("<b>" + NAZWISKO + "</b>");
+        let miejsce = "Park";
+        let wiek = 22;
+        console.log(typeof wiek);
+        const PI = 3.14;
+        // typy DYNAMICZNE
+        wiek = window.prompt("Ile mas zlat?", 123); // ob. window domyslny
+        console.log(wiek, typeof wiek)
+        wiek = 123;
+        //alert("mam" + 7 + wiek + "lat"); // 7123
+        //alert("mam" + (7 + wiek) + "lat"); // 130
+        //alert("mam" + (pareInt("7") + wiek) + "lat"); //parseFloat
+        console.log('test222', 'dzis mamy "Sw. Niep."');
+        console.log('test222', "dzis mamy \"Sw.Niep.\"");
+        console.log(`ELO ${wiek}`);
+        wiek = 100;
+        if (wiek >= 20)
+            alert("Masz wicej niz 20 lat")
+        alert("lol");
+
+        /*
++ - / * = ! ** %
+> < <= >= /= *= += -= != !==
+== ===
+"0" == 0  true
+"0" === 0 false
+"0" == 0 ? true : false
+{}
+>> << >>> ^ $ 
+
+        */
+        let f = confirm("czy czujeszz sie facetem?")
+        console.log(f);
+        if (f == false)
+            console.log("uffffff")
+        else
+            console.log("pozyjesz dlugo")
+    </script>
+</body>
+
+//// test.js /////
+console.log("ha ha ha"); // ; opcjonalny
+console.error("ERRROR")
+console.info("fgfgfgfgfgfg");
+console.table([1, 2, 3, 4, 5]);
+/*
+
+
+*/
+
+
+
+
+</html>

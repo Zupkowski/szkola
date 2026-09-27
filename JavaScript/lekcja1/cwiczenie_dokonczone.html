@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cwiczenie</title>
+</head>
+<style>
+    table, td {
+        border: 1px solid;
+    }
+    th {
+        background: cornflowerblue
+    }
+    .przekotna {
+        background: rgb(155, 255, 155);
+    }
+</style>
+<body>
+    <script>
+        document.write("<b>Witaj JavaScript</b><br>");
+        for (let i = -21; i < 22; i++) {
+            document.write(i + '<br>')
+        }
+        for (let i = 55; i > -15; i -= 5) {
+            document.write(i + " ")
+        }
+        document.write("<br>");
+        for (let i = 40; i >= 10; i--) {
+            if (i > 14 && i < 25) {
+                continue;
+            }
+            else {
+                document.write(i + " ")
+            }
+        }
+        for (let i = -40; i < 40; i++) {
+            if (i >= 3 && i < 30) {
+                continue;
+            }
+            else {
+                if (i % 2 != 0) {
+                    console.log(i)
+                }
+            }
+        }
+        console.log("+++++++++++++++++++++")
+        for (i = -20; i < 20; i++) {
+            if (i > 5 && i < 10) {
+                continue;
+            }
+            else {
+                if (i % 2 == 0) {
+                    console.log(i)
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+        console.log("+++++++++++++++++++++")
+        for (i = -100; i < 41; i++) {
+            if (i > -28 && i < 14) {
+                continue;
+            }
+            else {
+                if (i % 7 == 0) {
+                    console.log(i)
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+        document.write("<br>")
+        let liczba = Math.round(window.prompt("Podaj liczbę:"));
+        for (i = liczba; i > 0; i--) {
+            document.write("X")
+        }
+        document.write("<pre><br>");
+        for (i = 0; i<liczba; i++) {
+            for (j = 0; j<liczba; j++) {
+                if (i==0 || j==0 || i == liczba-1 || j==liczba-1) {
+                    document.write("X ")
+                }
+                else {
+                    document.write("  ")
+                }
+            }
+            document.write("<br>")
+        }
+        document.write("<pre><br>");
+        for (i = 0; i<liczba; i++) {
+            for (j = 0; j<liczba; j++) {
+                if (j==liczba-i-1 || j==liczba-1 || i==liczba-1) {
+                    document.write("X")
+                }
+                else {
+                    document.write(" ")
+                }
+            }
+            document.write("<br>")
+        }
+        for (i=1; i<=liczba; i++) {
+            for (j=0; j<i; j++) {
+                document.write(j+1)
+            }
+            document.write("<br>")
+        }
+        // let abc = document.createElement("br")
+        // document.querySelector("body").appendChild(abc);
+        document.write("<pre>");
+        for (i=0; i<liczba; i++) {
+            for (j=i+1; j>0; j--) {
+                document.write(j)
+            }
+            document.write("<br>")
+        }
+
+        let silnia = 1
+        for (i=1; i<=liczba; i++) silnia *= i
+        document.write(`<br>${liczba}! = `+silnia+"<br>")
+        let suma = 0
+        for (i=0; i<=liczba; i += 2) {
+            suma = suma+i
+        }
+        document.write(`<br>Suma liczb parzystych od 0 do ${liczba} = `+suma)
+
+        let ilosc_div = 0
+        for (i=1; i<=liczba; i++) {
+            if (liczba%i == 0) {
+                ilosc_div += 1
+            }
+        }
+        if (ilosc_div == 2) {
+            window.alert(`${liczba} JEST LICZBĄ PIERWSZĄ`)
+        }
+
+        document.write("<table>");
+        for (i=0; i<=liczba; i++) {
+            document.write("<tr>")
+            if (i==0) {
+                document.write("<td class=\"przekotna\">"+"</td>")
+            }
+            else {
+                document.write("<th>"+i+"</th>")
+            }
+            
+            for (j=1; j<=liczba; j++) {
+                if (i==0) {
+                    document.write("<th>"+j+"</th>")
+                }
+                else {
+                    if (i==j) {
+                        document.write("<td class=\"przekotna\">"+i*j+"</td>")
+                    }
+                    else {
+                        document.write("<td>"+i*j+"</td>")
+                    }
+                }
+            }
+            document.write("</tr>")
+        }
+        document.write("</table><br>");
+        let regon = window.prompt("Podaj REGON:");
+        let regonLen = regon.length
+        let regonSum = 0
+        window.alert(regonLen)
+        if (regonLen == 9) {
+            for (i=0;i<regonLen-1;i++) {
+                let weights = [8,9,2,3,4,5,6,7];
+                regonSum += regon[i]*weights[i];
+            }
+            let regonCheck = regonSum%11
+            if (regonCheck%10 == regon[regonLen-1]) {
+                window.alert("REGON jest poprawny.")
+            }
+            else {
+                window.alert("REGON nie jest poprawny.")
+            }
+        }
+        else if (regonLen == 14) {
+            for (i=0;i<regonLen-1;i++) {
+                let weights = [2,4,8,5,0,9,7,3,6,1,2,4,8];
+                regonSum += regon[i]*weights[i];
+            }
+            let regonCheck = regonSum%11
+            if (regonCheck%10 == regon[regonLen-1]) {
+                window.alert("REGON jest poprawny.")
+            }
+            else {
+                window.alert("REGON nie jest poprawny.")
+            }
+        }
+        else {
+            window.alert("Niepoprawna ilość cyfr (Numer REGON powinien mieć 9 lub 14 cyfr). Spróbuj ponownie.")
+        }
+    </script>
+</body>
+</html>

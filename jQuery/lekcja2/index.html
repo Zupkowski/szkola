@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery - lekcja 2</title>
+    <script src="../jquery-4.0.0.js"></script>
+</head>
+<body>
+    <script>
+        $(document).ready(function () {
+            for(let i = 0;i<4;i++){
+                console.log(i)
+            }
+
+
+            $("#select").on("input", function() {
+                console.log($(this).val())
+            })    
+
+
+            const bt = $("<button>") // nowy obiekt buttona
+            const h1 = $("<h1>") // nowy obiekt h1
+            const d1 = $("<div>") // nowy obiekt div
+
+
+            $("#mainDiv").append(h1) // dodajemy utworzony obiekt h1 do wcześniej istniejącego na stronie pustego diva z id="mainDiv"
+
+
+            $("#bt1").on("click", function(){
+                console.log($(this).width())
+            })
+
+            for(i=0; i<4; i++){
+            const button = $("<button>TEST</button>")
+            $("#mainDiv").append(button)
+            button.on("click", function(){
+                console.log($(this))
+            })
+            }
+        })
+    </script>
+    <input type="range" id="select">
+    <div id="mainDiv"></div>
+    <button id="bt1" width="100">CLICKME</button>
+</body>
+</html>

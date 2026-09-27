@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="../jquery-4.0.0.js"></script>
+    <style>
+        div {
+            margin-right: 5px;
+        }
+        .tile {
+            width: 100px;
+            height: 100px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            border-radius: 10px;
+        }
+        #mainContainer, #resultContainer {
+            display: flex;
+            margin: 10px;;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    Wybierz ilość: <select id="count"></select>
+    <button id="generate">Generuj</button>
+    <div id="mainContainer"></div>
+    <div id="resultContainer"></div>
+
+    <script>
+        $(document).ready(()=>{
+
+
+            function randColor() {
+                let randColor = "#"
+                for (let i=0; i<6; i++) {
+                    randColor += Math.floor(Math.random()*15).toString(16)
+                }
+                return randColor
+            }
+
+
+            function randNum() {
+                let random = Math.floor(Math.random()*10)
+                if (random != 0) {
+                    return random
+                }
+                else {
+                    while (random == 0) {
+                        random = Math.floor(Math.random()*10)
+                    }
+                    return random
+                }
+            }
+
+
+            for (let i=1;i<=10;i++) { //generating numbers in tile amount selector
+                $("#count").append(`<option>${i}`)
+            }
+
+
+
+
+
+
+            $("#generate").on("click", function() {
+                $("#mainContainer").empty()
+                for (let i=0; i<$("#count").val(); i++) {
+                    const kolor = randColor()
+                    const number = randNum()
+                    const tile = $("<div>").addClass("tile")
+                    tile.css("background", kolor)
+                    tile.text(number)
+                    $("#mainContainer").append(tile)
+                }
+
+                $(".tile").on("click", function() {
+                    const color = $(this).css("background")
+                    const number = parseInt($(this).text())
+                    $("#resultContainer").empty()
+                    for (let i=0;i<number;i++) {
+                        const resultTile = $("<div>").addClass("tile")
+                        resultTile.css("background", color)
+                        resultTile.css("width", "50px")
+                        resultTile.css("height", "50px")
+                        resultTile.text(i+1)
+
+                        resultTile.on("click", function() {
+                            $(this).remove()
+                        })
+                        
+                        $("#resultContainer").append(resultTile)
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+</html>

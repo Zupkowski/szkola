@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz 1</title>
+    <style>
+        * {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cwiczenie 01 - wysylanie danych metoda GET.</h1>
+    <form action="/handleForm" method="GET">
+        <input type="hidden" name="schowany" value="ukryta wartosc">
+        <input type="color" name="kolor"><br>
+        <input type="radio" name="radio">
+        <label for="radio">RADIO, MEIN RADIO</label><br>
+        <input type="checkbox" name="czek" value="czek1">
+        <label for="czek1">CZEK1</label>
+        <input type="checkbox" name="czek" value="czek2">
+        <label for="czek2">CZEK2</label><br>
+        <button type="submit">Wyślij</button>
+    </form>
+</body>
+</html>

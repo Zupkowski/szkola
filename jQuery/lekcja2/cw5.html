@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cw5</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .parent-element {
+            width: 1000px;
+            height: 40px;
+            line-height: 35px;
+            padding-left: 10px;
+            background: rgb(0, 128, 255);
+            color: white;
+            font-size: 20px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .delChild, .addChild {
+            float: right;
+        }
+    </style>
+    <script src="../jquery-4.0.0.js"></script>
+</head>
+<body>
+    <button id="createButton">Utwórz menu</button>
+    <button id="clearButton">Wyczyść menu</button>
+    <select id="count"></select><br>
+    <div id="menuContainer"></div>
+
+    <script>
+        $(document).ready(()=>{
+            // TWORZENIE ELEMENTÓW SELECTA (10 WYSTARCZY)
+            for (let i=1; i<=10;i++) {
+                $("#count").append(`<option value="${i}">${i}`)
+            }
+
+            // AKCJA PRZYCISKU TWORZENIA RODZICÓW
+            $("#createButton").on("click", ()=>{
+                const count = $("#count").val()
+
+                $("#menuContainer").empty()
+
+                for (let i=0; i<count; i++) {
+                    const parentElement = $("<div>")
+                        .addClass("parent-element")
+                        .text(`Parent ${i+1}`)
+                        .append("<button class='addChild'>+")
+                        .append("<button class='delChild'>-")
+
+                    $("#menuContainer").append(parentElement)
+                    
+                    //AKCJA PRZYCISKU TWORZENIA DZIECI
+                    let j = 1
+                    parentElement.find(".addChild").on("click", function() {
+                        //SPRAWDZENIE CZY CHILD CONTAINER JUZ ISTNIEJE
+                        let childCont = parentElement.next(".child-container")
+
+                        if (childCont.length == 0) {
+                            childCont = $("<div>").addClass("child-container")
+                            childCont.insertAfter(parentElement)
+                        }
+                        const childElem = $("<div>")
+                            .addClass("child-element")
+                            .text(`Child ${j}`)
+                        childCont.append(childElem)
+                        j++
+                    })
+                }
+            })
+        })
+    </script>
+</body>
+</html>
+
+<!-- 1. Po kliknięciu #createButton wyczyść kontener i w pętli utwórz elementy rodziców (.parent-element) zawierające ich nazwy oraz przyciski dodawania (+) i usuwania (x).
+2. Kliknięcie przycisku (+) przy rodzicu tworzy kontener .child-container (jeśli jeszcze nie istnieje) i wstawia do niego nowy element .child-element z kolejnym numerem (wyliczonym na podstawie najwyższego istniejącego indeksu) oraz własnym przyciskiem usuwania.
+3. Kliknięcie (x) wewnątrz .child-element usuwa go, a jeśli był to ostatni element w .child-container, usuwa również cały pusty kontener podrzędny.
+4. Kliknięcie (x) przy rodzicu usuwa go z DOM wraz z przylegającym do niego kontenerem dzieci (.child-container).
+5. Przycisk #clearButton opróżnia #mainContainer ze wszystkich elementów za pomocą .empty(). -->

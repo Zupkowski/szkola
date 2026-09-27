@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery - lekcja 1</title>
+    <script src="../jquery-4.0.0.js"></script>
+    <style>
+        div {
+            width: 150px;
+            height: 150px;
+            margin-top: 20px;
+            color: white;
+            text-align: center;
+        }
+        #sqr {
+            background-color: blue;
+        }
+        #sqr2 {
+            background-color: red;     
+            float: left;
+        }
+        #sqr3 {
+            background-color: green;
+            position: relative;
+            left: 0px;
+            top: 0px;
+        }
+        #sqr4 {
+            background-color: purple;
+        }   
+        #sqr5 {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        $(document).ready(function () {
+            // $("#btr").on("click", function () {
+            //     $("#sqr").css("background","red");
+            //     $("#sqr").text("CZERWONY");
+            // })
+            // $("#btg").on("click", function () {
+            //     $("#sqr").css("background","green");
+            //     $("#sqr").text("ZIELONY");
+            // })
+            // $("#btb").on("click", function () {
+            //     $("#sqr").css("background","blue");
+            //     $("#sqr").text("NIEBIESKI");
+            // })
+            $("#btn1").on('click', function() {
+                let size = confirm("Zwiększamy czy zmniejszamy?");
+                if (size) {
+                    $("#sqr").css("width", "300px");
+                    $("#sqr").css("height", "300px");
+                }
+                else {
+                    $("#sqr").css("width", "50px");
+                    $("#sqr").css("height", "50px");
+                }
+            })
+            let lr = true
+            $("#sqr2").on('click', function () {
+                if (lr) {
+                    $("#sqr2").css("float","left");
+                    lr = false
+                }
+                else {
+                    $("#sqr2").css("float","right");
+                    lr = true
+                }
+            })
+            let rd = true
+            let r = 50
+            let d = 50
+            $("#sqr3").on('click', function () {
+                if (rd) {
+                    $("#sqr3").css("left",r+"px");
+                    rd = false;
+                    r = r+50;
+                }
+                else {
+                    $("#sqr3").css("top",d+"px");
+                    rd = true;
+                    d = d+50;
+                }
+            })
+            let count = 1
+            $("#sqr4").on("mouseover", function() {
+                if (count == 5) {
+                    $("#sqr4").css("width","300px");
+                    $("#sqr4").css("height","300px");
+                }
+                $("#sqr4").text(count)
+                count += 1;
+            })
+            let num = 1
+            $("#sqr5").on("click", function () {
+                if (num % 2 == 0) {
+                    $("#sqr5").css("background-color","green");
+                }
+                else {
+                    $("#sqr5").css("background-color","red");
+                }
+                $("#sqr5").text(num)
+                num += 1;
+            })
+        })
+    </script>
+    <!-- <button id="btr">Red</button>
+    <button id="btg">Green</button>
+    <button id="btb">Blue</button> -->
+    <button id="btn1">Confirm?</button>
+    <div id="sqr"></div>
+    <div id="sqr3"></div>
+    <div id="sqr4"></div>
+    <div id="sqr5"></div>
+    <div id="sqr2"></div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CW5</title>
+    <script src="../jquery-4.0.0.js"></script>
+</head>
+<body>
+    <!-- BUTTONY -->
+    <button id="createMenu">Utwórz menu</button>
+    <button id="delMenu">Usuń menu</button>
+    <select id="count"></select><br>
+    <!-- DIVY -->
+     <div id="mainCont"></div>
+
+
+    <script>
+        $(document).ready(()=>{
+            // TWORZENIE ITEMÓW W SELECIE
+            for (let i=1; i<=10;i++) {
+                $("#count").append(`<option>${i}`)
+            }
+
+            $("#createMenu").on("click", ()=>{
+                const count = parseInt($("#count").val())
+                $("#mainCont").empty()
+
+                for (let i=0; i<count; i++) {
+                    const parentElement = $("<div>")
+                        .addClass("parent-element")
+                        .text(`Parent ${i+1}`)
+                        .append(`<button class="addChild">+`)
+                        .append(`<button class="delChild">-`)
+                    $("#mainCont").append(parentElement)
+                    // DODAWANIE ELEMENTOW DZIECI
+                    $(".addChild").on("click", function() {
+                        let childContainer = $("<div>").addClass("child-container")
+                        let childElement = $("<div>").addClass("child-element")
+                        if ($(".child-container").length === 0) {
+                            $(this).parent().append(childContainer)
+                        }
+                        childContainer.append(childElement)
+                    })
+                }
+            })
+        })
+    </script>
+</body>
+</html>
+
+<!-- 1. Po kliknięciu #createButton wyczyść kontener i w pętli utwórz elementy rodziców (.parent-element) zawierające ich nazwy oraz przyciski dodawania (+) i usuwania (x).
+2. Kliknięcie przycisku (+) przy rodzicu tworzy kontener .child-container (jeśli jeszcze nie istnieje) i wstawia do niego nowy element .child-element z kolejnym numerem (wyliczonym na podstawie najwyższego istniejącego indeksu) oraz własnym przyciskiem usuwania.
+3. Kliknięcie (x) wewnątrz .child-element usuwa go, a jeśli był to ostatni element w .child-container, usuwa również cały pusty kontener podrzędny.
+4. Kliknięcie (x) przy rodzicu usuwa go z DOM wraz z przylegającym do niego kontenerem dzieci (.child-container).
+5. Przycisk #clearButton opróżnia #mainContainer ze wszystkich elementów za pomocą .empty(). -->

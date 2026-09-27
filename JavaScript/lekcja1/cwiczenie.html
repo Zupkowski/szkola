@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cwiczenie</title>
+</head>
+
+<body>
+    <script>
+        document.write("<b>Witaj JavaScript</b><br>");
+        for (let i = -21; i < 22; i++) {
+            document.write(i + '<br>')
+        }
+        for (let i = 55; i > -15; i -= 5) {
+            document.write(i + " ")
+        }
+        document.write("<br>");
+        for (let i = 40; i >= 10; i--) {
+            if (i > 14 && i < 25) {
+                continue;
+            }
+            else {
+                document.write(i + " ")
+            }
+        }
+        for (let i = -40; i < 40; i++) {
+            if (i >= 3 && i < 30) {
+                continue;
+            }
+            else {
+                if (i % 2 != 0) {
+                    console.log(i)
+                }
+            }
+        }
+        console.log("+++++++++++++++++++++")
+        for (i = -20; i < 20; i++) {
+            if (i > 5 && i < 10) {
+                continue;
+            }
+            else {
+                if (i % 2 == 0) {
+                    console.log(i)
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+        console.log("+++++++++++++++++++++")
+        for (i = -100; i < 41; i++) {
+            if (i > -28 && i < 14) {
+                continue;
+            }
+            else {
+                if (i % 7 == 0) {
+                    console.log(i)
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+        document.write("<br>")
+        let liczba = window.prompt("Podaj liczbę:");
+        for (i = liczba; i > 0; i--) {
+            document.write("X")
+        }
+    </script>
+</body>
+
+</html>

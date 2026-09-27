@@ -1,0 +1,24 @@
+.kotyText {
+    color: blue;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.drzewaText {
+    color: green;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.autaText {
+    color: red;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.title1 {
+    color: red;
+}
+
+.title2 {
+    color: blue;
+}
+
+.title3 {
+    color: orange;
+}

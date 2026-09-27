@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ćwiczeniefullstefanczyk01</title>
+  <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            color: blue;
+            text-align: center;
+        }
+        #d1 {
+            width: 300px;
+            height: 300px;
+            background-color: gray;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            text-align: center;
+        }
+        #bt {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="../jquery-4.0.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            let isClicked = false;
+
+            // Najechanie myszą (działa tylko, gdy nie jest kliknięte)
+            $("#bt").on("mouseenter", function () {
+                if (!isClicked) {
+                    $(this).css("background-color", "red");
+                    $("#h-status").text("obsługa zdarzeń\ndodana");
+                }
+            });
+
+            // Zjechanie myszą (działa tylko, gdy nie jest kliknięte)
+            $("#bt").on("mouseleave", function () {
+                if (!isClicked) {
+                    $(this).css("background-color", "");
+                    $("#h-status").text("obsługa zdarzeń\nusunięta");
+                }
+            });
+
+            // Kliknięcie - blokuje stan na czerwono razem z boxem, ponowne kliknięcie resetuje
+            $("#bt").on("click", function () {
+                isClicked = !isClicked;
+
+                if (isClicked) {
+                    $(this).css("background-color", "red");
+                    $("#h-status").text("obsługa zdarzeń\ndodana");
+                    $("#d1").css("background-color", "red").html("<b>text bold</b><br><i>text italic</i>");
+                } else {
+                    $(this).css("background-color", "");
+                    $("#h-status").text("obsługa zdarzeń\nusunięta");
+                    $("#d1").css("background-color", "gray").html("");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2 id="h-status" style="white-space: pre-line;">obsługa zdarzeń
+usunięta</h2>
+    <button id="bt">DODAJ / USUŃ</button>
+    <div id="d1"></div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript - Lekcja 2 - Cwiczenie</title>
+    <script>
+        // ZADANIE NR. 1
+        let sentence = window.prompt("Podaj zdanie:");
+        let length = sentence.length
+        console.log(sentence.matchAll("a"));
+
+        for (i=0;i<length;i++) {
+            let char = sentence.charAt(i);
+            if ("aiueoyąęó".includes(char)) {
+                document.write("<font color='red'><b>"+char+"</b></font>");
+            }
+            else {
+                document.write(char)
+            }
+        }
+        // ZADANIE NR. 2
+        let array = eval(window.prompt("Podaj tablicę:"));
+        let shift = window.prompt("O ile przesunąć?");
+        let shiftAmount = 
+        let arrayLen = array.length;
+
+        let koniec = array.slice(0,arrayLen-shiftAmount);
+        let poczatek = array.slice(arrayLen-shiftAmount,arrayLen);
+        let finish = poczatek.concat(koniec);
+        console.log(finish);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-4.0.0.js"></script>
+    <style>
+        .gameArea {
+            width: 280px;
+            height: 280px;
+            border: 1px solid grey;
+            border-radius: 10px;
+            position: relative;
+            left: 0;
+            top: 0;
+        }
+        .square {
+            background: grey;
+            border-radius: 5px;
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            position: absolute;
+            
+        }
+        .squareClicked {
+            background: orange;
+        }
+        #player1 {
+            background: green;
+            border-radius: 25px;
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            position: absolute;
+            
+        }
+        #player2 {
+            background: red;
+            border-radius: 25px;
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <button id="start">START</button>
+    <button id="ruch">RUCH</button>
+    <button id="reset">RESET</button>
+    <div id="gameArea" class="gameArea"></div>
+    <div id="msgBox"></div>
+    <script>
+        $(document).ready(()=>{
+            function msg(msg) {
+                $("#msgBox").html(msg)
+            }
+
+            let clickedIndx = []
+            let counter = 0
+            let top = 0
+            let left = 0
+
+            for (let i=0; i<5; i++) {
+                left = 0
+                for (let j=0; j<5; j++) {
+                    const square = $("<div>")
+                        .addClass("square")
+                        .css("left", `${left}px`)
+                        .css("top", `${top}px`)
+                    $("#gameArea").append(square)
+                    left = left+55
+                }
+                top = top+55
+            }
+            //WYBIERANIE KWADRACIKÓW
+            $(".square").on("click", function (){
+                if ($(this).hasClass("squareClicked")) {
+                    msg(`<span style="color: red">Ten kwadrat został juz wybrany!</span>`)
+                }
+                else {
+                    $(this).addClass("squareClicked")
+                    let clickedPos = {
+                        x:parseInt($(this).css("left").replace("px","")), 
+                        y:parseInt($(this).css("top").replace("px",""))
+                    }
+                    clickedIndx.push(clickedPos)
+                    console.log(clickedIndx)
+                    msg(`Wybrano ${clickedIndx.length} elementów.`)
+                }
+            })
+            //START GRY
+            $("#start").on("click", ()=>{
+                counter = clickedIndx.length
+                if (clickedIndx.length < 3) {
+                    msg('<span style="color: red">Za mała liczba elementów, wybierz co najmniej <b>3</b>.</span>')
+                }
+                else {
+                    msg('Start gry.')
+
+                    let initOneX = clickedIndx[0].x
+                    let initOneY = clickedIndx[0].y
+                    let initTwoX = clickedIndx[clickedIndx.length-1].x
+                    let initTwoY = clickedIndx[clickedIndx.length-1].y
+
+                    const playerOne = $("<div id='player1'>")
+                        .css("left",`${initOneX}px`)
+                        .css("top", `${initOneY}px`)
+                    const playerTwo = $("<div id='player2'>")
+                        .css("left",`${initTwoX}px`)
+                        .css("top", `${initTwoY}px`)
+                    $("#gameArea").append(playerOne).append(playerTwo)
+                }
+            })
+
+            $("#ruch").on("click", ()=>{
+                if (counter % 2 == 0) {
+                    for (let i=0; i<clickedIndx.length; i++) {
+                        let x = clickedIndx[i].x
+                        let y = clickedIndx[i].y
+
+                        $("#player1")
+                            .css("left",`${x}px`)
+                            .css("top", `${y}px`)
+                    }
+                }
+                else {
+                    for (let i=clickedIndx.length-1; i>=0; i--) {
+                        let x = clickedIndx[i].x
+                        let y = clickedIndx[i].y
+
+                        $("#player2")
+                            .css("left",`${x}px`)
+                            .css("top", `${y}px`)
+                    }
+                }
+                counter -= 1
+            })
+            //RESETOWANIE
+            $("#reset").on("click", ()=> {
+                $(".squareClicked").removeClass("squareClicked")
+                $("#player1").remove()
+                $("#player2").remove()
+                clickedIndx.length = 0
+                msg('')
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz 3</title>
+    <style>
+        * {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cwiczenie 03 - formularz wysyłany metodą POST - select, radio</h1>
+    <form action="/" method="POST">
+        <select name="count" id="count">
+            <option value="1" selected>[ile]</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <select name="color" id="color">
+            <option value="red" selected>[kolor]</option>
+            <option value="red">red</option>
+            <option value="green">green</option>
+            <option value="blue">blue</option>
+        </select>
+        <select name="font" id="font">
+            <option value="small" selected>[wielkosc fonta]</option>
+            <option value="small">small</option>
+            <option value="medium">medium</option>
+            <option value="large">large</option>
+        </select>
+        <input type="radio" name="size" value="100px" checked>
+        <label for="small">small</label>
+        <input type="radio" name="size" value="200px">
+        <label for="medium">medium</label>
+        <input type="radio" name="size" value="300px">
+        <label for="big">big</label>
+        <button type="submit">Wyślij</button>
+    </form>
+</body>
+</html>

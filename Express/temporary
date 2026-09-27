@@ -1,0 +1,55 @@
+// function addUser(nick, email) {
+//     if (users.includes(nick) || users.includes(email)) {
+//         return "TAKI UŻYTKOWNIK ISTNIEJE JUŻ W BAZIE DANYCH!"
+//     }
+//     else {
+//       users.push({"nick":nick,"email":email})
+//       return "Dodano użytkownika"
+//     }
+// }
+
+// function removeUserBySelect(email) {
+//     let html = `
+//     <h1>Usuń email (Select)</h1>
+//     <form action="/removeUserBySelect" method="post">
+//         <select name="email">
+//     `
+//     for (let i=0; i<users.length; i++) {
+//         html += `<option value="${i}">${Object.values(users[i])[1]}</option>`
+//     }
+//     html += `
+//         </select>
+//         <button type="submit">Wyślij</button>
+//     </form>
+//     `
+//     users.splice(email,1)
+//     return html
+// }
+
+// app.use(express.urlencoded({
+//   extended: true
+// }))
+
+// app.get("/", function(req, res){
+//     res.sendFile(path.join(__dirname,"/static/addUser.html"))    
+// })
+
+// app.post("/", function(req, res) {
+//     console.log(req.body)
+//     addUser(req.body.nick, req.body.email)
+//     res.sendFile(path.join(__dirname,"/static/addUser.html")) 
+//     console.log(users)
+// })
+
+// app.get("/removeUserBySelect", function(req, res){
+//     res.send(removeUserBySelect()) 
+// })
+
+// app.post("/removeUserBySelect", function(req,res){
+//     res.send(removeUserBySelect(req.body.email))
+//     console.log(users)
+// })
+
+// app.listen(PORT, function() {
+//     console.log("Odpalona na porcie "+PORT)
+// })

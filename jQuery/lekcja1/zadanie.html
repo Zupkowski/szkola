@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery - zadanie1</title>
+    <script src="../jquery-4.0.0.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: monospace;
+        }
+        h1 {
+            color: blue;
+        }
+        #btn {
+            width: 150px;
+            height: 50px;
+            background: grey;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #sqr {
+            width: 450px;
+            height: 450px;
+            background: grey;
+            margin: 20px 0;
+            text-align: center;
+            color: white;
+            font-size: 60px;
+        }
+    </style>
+</head>
+<body>
+    <h1>T: jQuery - zdarzenia</h1>
+    <div id="btn">DODAJ / USUŃ</div>
+    <div id="sqr"></div>
+    <script>
+        let toggle = true
+        $("#btn").on("click", function () {
+            if (toggle) {
+                $("#sqr").css("background", "grey")
+                $("#sqr").html("")
+                toggle = false
+            }
+            else {
+                $("#sqr").css("background", "red")
+                $("#sqr").html("<b>text bold</b><br><i>text italic</i>")
+                toggle = true
+            }
+        $("#btn").on("mouseenter", function() {
+            $(this).css("background", "red")
+            $(this).css("border", "2px solid black")
+            $(this).css("border-radius", "5px")
+            $(this).html("<b>DODAJ / USUŃ</b>")
+            $("h1").text("obsługa zdarzeń dodana");
+        })
+        $("#btn").on("mouseleave", function() {
+            if (toggle == false) {
+                $("#btn").css("background", "grey")
+                $("#btn").css("border", "none")
+                $("#btn").css("border-radius", "0")
+                $("#btn").html("DODAJ / USUŃ")
+                $("h1").text("obsługa zdarzeń usunięta");
+            }
+        }) 
+        });
+    </script>
+</body>
+</html>
