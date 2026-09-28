@@ -1,0 +1,10 @@
+credki.rtf
+.DS_Store
+jQuery/jquery-4.0.0.js
+Flask/aplikacje-serwerowe
+*.pdf
+*.jpg
+*.pptx
+*/node_modules
+**/WelcomeScreen/
+
