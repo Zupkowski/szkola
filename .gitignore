@@ -4,7 +4,8 @@ jQuery/jquery-4.0.0.js
 Flask/aplikacje-serwerowe
 *.pdf
 *.jpg
+*.png
 *.pptx
-*/node_modules
+**/node_modules
 **/WelcomeScreen/
 

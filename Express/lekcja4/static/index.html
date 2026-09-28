@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File upload</title>
+</head>
+
+<body>
+    <h1>01: form => upload signle file to the server</h1>
+    <form enctype="multipart/form-data" method="POST" action="/handleUpload">
+        data:
+        <input type="date" name="date">
+        nazwa:
+        <input type="text" name="name">
+        zdjecie:
+        <input type="file" required accept="image/*" name="imagetoupload">
+        <button type="submit">WYŚLIJ</button>
+    </form>
+</body>
+
+</html>

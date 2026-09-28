@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File upload - multiple</title>
+</head>
+
+<body>
+    <h1>01: form => upload multiple files to the server</h1>
+    <form enctype="multipart/form-data" method="POST" action="/handleUpload">
+        data:
+        <input type="date" name="date">
+        zdjecia:
+        <input type="file" multiple required accept="image/*" name="imageupload">
+        <button type="submit">WYŚLIJ</button>
+    </form>
+</body>
+
+</html>
