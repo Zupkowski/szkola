@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cwiczenie 1b</title>
+    <script src="../jquery-4.0.0.js"></script>
+    <style>
+        table, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tabela html - koszyk</h1>
+    Produkt:<br>
+    <select id="prodSel"></select><br>
+    <button id="dodaj">DODAJ</button><br>
+    <table id="koszyk"></table>
+    <script>
+        $(document).ready(()=>{
+            const data = {
+                head: ["lp", "produkt", "cena", "ilosc", "razem"],
+                products:{
+                    prices: ["5,60", "3,23", "7,45", "10,00", "3,20", "9,22"],
+                    names: ["chleb", "mąka", "masło", "kefir", "dżem", "inne"]
+                }
+            }
+            let koszyk = []
+
+            function genSelect(id, prod){
+                for (let i=0; i<prod.prices.length; i++) {
+                    const opt = $("<option>")
+                    const optTxt = `${prod.names[i]} (${prod.prices[i]} zł)`
+                    opt.attr("value", i).text(optTxt)
+                    $(`#${id}`).append(opt)
+                }
+            }
+            function genTableHead(id, head){
+                const headRow = $("<tr>")
+                for (let i=0; i<head.length; i++) {
+                    const th = $("<th>")
+                    th.text(head[i])
+                    headRow.append(th)
+                }
+                $(`#${id}`).append(headRow)
+            }
+
+            function genTableItem(id) {
+                const tr = $("<tr>")
+                tr.append($("<td>").text(lp))
+                tr.append($("<td>").text(koszyk[id].name))
+                tr.append($("<td>").text(koszyk[id].price))
+                tr.append($("<td>").text(koszyk[id].amount))
+                tr.append($("<td>").text(koszyk[id].amount*(koszyk[id].price.replace(",",".")).toFixed(2)))
+                $("#koszyk").append(tr)
+                
+            }
+
+            function renderTable() {
+                $("#koszyk").empty()
+                genTableHead("koszyk", data.head)
+                let sum=0
+                for (let i=0; i<koszyk.length; i++) {
+                    const item = koszyk[i]
+                    const razem = item.amount * (item.price.replace(",", "."))
+                    sum += razem
+                    const tr = $("<tr>")
+                    tr.append($("<td>").text(i+1))
+                    tr.append($("<td>").text(item.name))
+                    tr.append($("<td>").text(item.price))
+                    tr.append($("<td>").text(item.amount))
+                    tr.append($("<td>").text(razem.toFixed(2).replace(".", ",")))
+                    $("#koszyk").append(tr)
+                }
+                const sumRow = $("<tr>")
+                sumRow.append($("<td>").attr("colspan",4).text("Suma:"))
+                sumRow.append($("<td>").text(sum))
+                $("#koszyk").append(sumRow)
+            }
+
+            genSelect("prodSel", data.products)
+
+            $("#dodaj").on("click", ()=>{
+                const id = $("#prodSel").val()
+                const addedId = koszyk.findIndex(produkt => produkt.id == $("#prodSel").val())
+                if (addedId != -1){
+                    koszyk[addedId].amount += 1
+                }
+                else {
+                    koszyk.push({id:id, name:data.products.names[id], price:data.products.prices[id], amount:1})
+
+                }
+                renderTable()
+            })
+
+        })
+    </script>
+</body>
+</html>

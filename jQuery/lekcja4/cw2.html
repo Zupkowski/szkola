@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cwiczenie 2</title>
+    <script src="../jquery-4.0.0.js"></script>
+    <style>
+        .board {
+            display: grid;
+            grid-template-columns: repeat(5, 50px);
+            grid-template-rows: repeat(5, 50px);
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="board"></div>
+    <script>
+        $(document).ready(()=>{
+            let fields = []
+
+            for (let i = 0; i < 25; i++) {
+            // losowanie liczby z zakresu 1-100
+            const randomNumber = Math.floor(Math.random() * 100) + 1;
+            
+            const field = $('<div>')
+            .addClass('field')
+            .attr('data-index', i)
+            .attr('data-value', randomNumber)
+
+            fields.push({ element: field, value: randomNumber });
+            }
+
+            fields.forEach(field => {
+                if (field.value % 2 === 0) {
+                    field.element.css('background-color', 'red');
+                }
+                else {
+                    field.element.css('background-color', 'blue');
+                }
+            });
+
+            for (let i=0; i<25; i++) {
+                const div = $(fields[i].element)
+                $(".board").append($(div).text(fields[i].value))
+            }
+            
+        })
+    </script>
+</body>
+</html>

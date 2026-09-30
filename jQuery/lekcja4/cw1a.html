@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cwiczenie 1a</title>
+    <script src="../jquery-4.0.0.js"></script>
+    <style>
+        table, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tabela html - tablice</h1>
+    <button id="make">GENERUJ TABELĘ</button>
+    <table id="table"></table>
+    <script>
+        $(document).ready(()=>{
+            const data = {
+                header:{
+                    lps: ["lp", "cena", "produkt"],
+                },
+                products:{
+                    prices: ["5,60", "3,23", "7,45", "10,00", "3,20", "9,22"],
+                    names: ["chleb", "mąka", "masło", "kefir", "dżem", "inne"]
+                }
+            }
+
+            $("#make").on("click", ()=>{
+                $("#table").empty()
+                const lps = data.header.lps
+                const header = $("<tr>")
+                //TWORZENIE HEAEDERA
+                for (let i=0; i<lps.length; i++) {
+                    const th = $("<th>")
+                    th.text(lps[i])
+                    header.append(th)
+                }
+                $("#table").append(header)
+
+                const prices = data.products.prices
+                const names = data.products.names
+                //TWORZENIE RZEDOW PRODUKTOW
+                for (let i=0; i<prices.length; i++) {
+                    const tr = $("<tr>")
+                    tr.append($("<td>").text(i+1))
+                    tr.append($("<td>").text(prices[i]))
+                    tr.append($("<td>").text(names[i]))
+                    $("#table").append(tr)
+                }
+                //SUMA
+                let suma = 0
+                for (let i=0; i<prices.length; i++) {
+                    let price = parseFloat(prices[i].replace(",","."))
+                    suma = suma + price
+                }
+                suma = suma.toString().replace(".",",")
+                //RZAD SUMY
+                const sumaRow = $("<tr>")
+                sumaRow.append($("<td colspan=2>").text("Suma"))
+                sumaRow.append($("<td>").text(suma))
+                $("#table").append(sumaRow)
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lustro - Tablice</title>
+    <script src="../jquery-4.0.0.js"></script>
+    <style>
+        body { display: flex; gap: 30px; }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(5, 50px);
+            grid-template-rows: repeat(5, 50px);
+            gap: 5px;
+        }
+        .field {
+            width: 50px;
+            height: 50px;
+            background: lightgrey;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h3>Lewy panel (klikalny)</h3>
+        <div id="left" class="board"></div>
+    </div>
+    <div>
+        <h3>Prawy panel (lustro)</h3>
+        <div id="right" class="board"></div>
+    </div>
+
+    <script>
+        $(document).ready(()=>{
+            const size = 5
+            let objectsArray = []
+
+            // LEWY PANEL
+            for (let j = 0; j < size; j++) {
+                for (let i = 0; i < size; i++) {
+                    const div = $("<div>")
+                        .addClass("field")
+                        .attr("data-x", i)
+                        .attr("data-y", j)
+                        .text(`(${j}, ${i})`)
+                        .on("click", function () {
+                            const x = parseInt($(this).data("x"))
+                            const y = parseInt($(this).data("y"))
+                            const mirrorX = size - 1 - x
+                            console.log(x)
+                            console.log(mirrorX)
+
+                            $(this).css("background", "red")
+                            objectsArray[y][mirrorX].object.css("background", "blue")
+                        })
+                    $("#left").append(div)
+                }
+            }
+
+            // PRAWY PANEL
+            for (let j = 0; j < size; j++) {
+                let tab = []
+                for (let i = 0; i < size; i++) {
+                    const div = $("<div>").addClass("field").text(`(${j}, ${i})`)
+                    tab[i] = { object: div, x: i, y: j }
+                    $("#right").append(div)
+                }
+                objectsArray[j] = tab
+            }
+        })
+    </script>
+</body>
+</html>
