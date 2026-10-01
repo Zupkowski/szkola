@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadanie 5 - parents/children</title>
+    <script src="../jquery-4.0.0.js"></script>
+    <style>
+        .parent-element {
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 8px;
+            margin: 10px;
+            width: 300px;
+        }
+        .child-container {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+        .child-element {
+            background: #eee;
+            border-radius: 4px;
+            padding: 4px 8px;
+            margin: 4px 0;
+        }
+        button { margin-left: 6px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Zadanie 5 - struktura parents/children</h1>
+    Liczba rodziców: <input type="number" id="countInput" value="3" min="1"><br><br>
+    <button id="createButton">UTWÓRZ</button>
+    <button id="clearButton">WYCZYŚĆ</button>
+    <div id="mainContainer"></div>
+
+    <script>
+        $(document).ready(() => {
+
+            // 1. TWORZENIE RODZICÓW
+            $("#createButton").on("click", () => {
+                $("#mainContainer").empty()
+                const count = parseInt($("#countInput").val())
+
+                for (let i = 1; i <= count; i++) {
+                    const parentElement = $("<div>")
+                        .addClass("parent-element")
+                        .text(`Rodzic ${i}`)
+                        .append(
+                            $("<button>").addClass("addChild").text("+")
+                        )
+                        .append(
+                            $("<button>").addClass("delParent").text("x")
+                        )
+                    $("#mainContainer").append(parentElement)
+                }
+            })
+
+            // 2. DODAWANIE DZIECKA (delegacja zdarzeń - działa też dla elementów dodanych później)
+            $("#mainContainer").on("click", ".addChild", function () {
+                const parent = $(this).closest(".parent-element")
+                let childContainer = parent.find(".child-container")
+
+                // jeśli kontener dzieci jeszcze nie istnieje - tworzymy go
+                if (childContainer.length === 0) {
+                    childContainer = $("<div>").addClass("child-container")
+                    parent.append(childContainer)
+                }
+
+                // wyliczamy kolejny numer na podstawie NAJWYŻSZEGO istniejącego indeksu
+                let maxIndex = 0
+                childContainer.find(".child-element").each(function () {
+                    const idx = parseInt($(this).data("index"))
+                    if (idx > maxIndex) maxIndex = idx
+                })
+                const newIndex = maxIndex + 1
+
+                const childElement = $("<div>")
+                    .addClass("child-element")
+                    .attr("data-index", newIndex)
+                    .text(`Dziecko ${newIndex}`)
+                    .append(
+                        $("<button>").addClass("delChild").text("x")
+                    )
+
+                childContainer.append(childElement)
+            })
+
+            // 3. USUWANIE DZIECKA
+            $("#mainContainer").on("click", ".delChild", function () {
+                const childElement = $(this).closest(".child-element")
+                const childContainer = childElement.closest(".child-container")
+
+                childElement.remove()
+
+                // jeśli to było ostatnie dziecko - usuwamy też pusty kontener
+                if (childContainer.find(".child-element").length === 0) {
+                    childContainer.remove()
+                }
+            })
+
+            // 4. USUWANIE RODZICA (wraz z jego child-container)
+            $("#mainContainer").on("click", ".delParent", function () {
+                $(this).closest(".parent-element").remove()
+            })
+
+            // 5. CZYSZCZENIE CAŁOŚCI
+            $("#clearButton").on("click", () => {
+                $("#mainContainer").empty()
+            })
+
+        })
+    </script>
+</body>
+</html>
