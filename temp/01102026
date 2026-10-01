@@ -1,0 +1,70 @@
+<?php
+session_start();
+echo session_id();
+$_SESSION['user'] = "Anna";
+$_SESSION['rola'] = "ADMIN";
+print_r($_SESSION);
+
+$options = [
+    // Increase the bcrypt cost from 12 to 13.
+    'cost' => 13,
+];
+$hsh = password_hash("anna", PASSWORD_BCRYPT, $options);
+echo $hsh;
+var_dump(password_verify('aaa', $hsh));
+ ----------------
+ 
+ <?php
+session_start();
+print_r($_SESSION);
+
+if (!isset($_SESSION['user'])) {
+    header("Location:test.php");
+} else {
+    echo "OK";
+}
+//session_destroy();
+
+
+
+---------
+<pre>
+<?php
+/*
+$arr = [
+    [
+        12,
+        13,
+        "imie" => "Maciej"
+    ]
+];
+print_r($arr);
+
+$arr2 = array(
+    array(
+        "klucz" => "w"
+    )
+);
+print_r($arr2);
+*/
+/*
+$imie = "Anna";
+function test(int $a, $b = 12)
+{
+    global $imie;
+    echo $imie;
+    $imie = "Maciej";
+    echo "$a $b";
+}
+test(10);
+echo $imie;
+
+$imie = "Olga";
+function t(string &$i)
+{
+    $i = "Szymon";
+}
+t($imie);
+echo $imie;
+*/
+
