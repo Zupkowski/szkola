@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprawdzian</title>
+    <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .bodyDiv {
+            display: flex;
+        }
+
+        .staticCont {
+            background: lightgrey;
+            margin: 10px;
+            padding: 5px 20px;
+            padding-bottom: 40px;
+            border-radius: 10px;
+        }
+
+        .task {
+            display: flex;
+        }
+
+        .termin {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Sprawdzian - jQuery</h1>
+    <div class="bodyDiv">
+        <div class="left">
+            <div class="staticCont">
+                <h2 style="color: green;">Dodaj nowy projekt</h2>
+                <h4>Nazwa projektu:</h4>
+                <input type="text" required id="projectName"><br>
+                <button type="submit" id="projectSubmit">Utwórz projekt</button>
+            </div>
+            <div class="staticCont">
+                <h2 style="color: rgb(0, 128, 255);">Dodaj nowe zadanie</h2>
+                <h4>Wybierz projekt docelowy:</h4>
+                <select id="taskProjectSelect"></select>
+                <h4>Nazwa zadania:</h4>
+                <input type="text" required id="taskName">
+                <h4>Dni do terminu:</h4>
+                <input type="range" id="taskDays" min="-30" max="30" value="14"><br>
+                <button type="submit" id="taskSubmit">Dodaj zadanie</button>
+            </div>
+        </div>
+        <div class="right">
+
+        </div>
+    </div>
+    <script>
+        $(document).ready(() => {
+            let dane = {
+                data: [
+                    {
+                        id: 1,
+                        name: "platforma e-commerce v2.0",
+                        tasks: [
+                            { id: 101, name: "implementacja płatności blik", status: "Do zrobienia", dniDoTerminu: 5 },
+                            { id: 102, name: "testy wydajnościowe serwera", status: "Ukończone", dniDoTerminu: 10 },
+                            { id: 103, name: "naprawa błędów widoku mobilnego", status: "Do zrobienia", dniDoTerminu: -8 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "kampania marketingowa",
+                        tasks: [
+                            { id: 201, name: "utworzenie grafik promocyjnych", status: "Do zrobienia", dniDoTerminu: 15 },
+                            { id: 202, name: "uruchomienie reklam google ads", status: "Ukończone", dniDoTerminu: 3 },
+                            { id: 203, name: "analiza konkurencji", status: "Ukończone", dniDoTerminu: 0 }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        name: "automatyzacja raportowania",
+                        tasks: [
+                            { id: 301, name: "integracja z bazami danych", status: "Do zrobienia", dniDoTerminu: 20 },
+                            { id: 302, name: "testy jednostkowe skryptu", status: "Do zrobienia", dniDoTerminu: 40 }
+                        ]
+                    }
+                ]
+            }
+
+            function genSelOpt() {
+                const sel = $("#taskProjectSelect")
+                for (i = 0; i < dane.data.length; i++) {
+                    const option = $("<option>")
+                    option.attr("value", dane.data[i].id).text(dane.data[i].name)
+                    sel.append(option)
+                }
+            }
+            function makeProject() {
+                for (let i = 0; i < dane.data.length; i++) {
+                    //TWORZENIE BODY PROJEKTU
+                    const body = $("<div>")
+                        .addClass("projectBody")
+                        .attr("id", dane.data[i].id)
+                        .append($('<h2 style="color: rgb(0, 128, 255);">')
+                            .text(dane.data[i].name))
+                    //TWORZENIE DIVA NA TASKI
+                    const tasksDiv = $("<div>").addClass("tasksDiv")
+                    for (let j = 0; j < dane.data[i].tasks.length; j++) {
+                        const current = dane.data[i].tasks[j]
+                        //TWORZENIE DIVA NA TASK
+                        const task = $("<div>")
+                            .addClass("task")
+                            .attr("id", current.id)
+                            .append($("<p>").text(current.name))
+                            .append($("<p>").text(`Do terminu: ${current.dniDoTerminu} dni`).addClass("termin"))
+                            .append($("<select>").attr("id", current.id).append($("<option>").text("Do zrobienia")).append($("<option>").text("Ukończone")))
+
+                        tasksDiv.append(task)
+                        body.append(tasksDiv)
+                    }
+                    $(".right").append(body)
+                }
+            }
+            function addProject() {
+                $("#projectSubmit").on("click", () => {
+                    $(".right").empty()
+                    $("#taskProjectSelect").empty()
+                    dane.data.push(
+                        {
+                            id: dane.data.length + 1,
+                            name: $("#projectName").val(),
+                            tasks: [
+
+                            ]
+                        }
+                    )
+                    genSelOpt()
+                    makeProject()
+                })
+            }
+            function addTask() {
+                $("#taskSubmit").on("click", () => {
+                    $(".right").empty()
+                    taskList = dane.data[$("#taskProjectSelect").val() - 1].tasks
+                    taskList.push(
+                        { id: taskList[taskList.length - 1].id + 1, name: $("#taskName").val(), status: "Do zrobienia", dniDoTerminu: $("#taskDays").val() }
+                    )
+                    makeProject()
+                })
+            }
+
+
+            genSelOpt()
+            makeProject()
+            addProject()
+            addTask()
+
+        })
+    </script>
+</body>
+
+</html>
