@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File upload - multiple</title>
+</head>
+
+<body>
+    <h1>01: form => upload multiple files to the server</h1>
+        data:
+        <input type="date" name="date">
+        zdjecia:
+        <input type="file" required accept="image/*" id="fileInput">
+        <button type="submit" id="send">WYŚLIJ</button>
+    <script>
+        document.getElementById("send").onclick = function () {
+            const fd = new FormData();
+            fd.append("file", document.getElementById("fileInput").files[0]); // pierwszy plik z inputa
+
+            const body = fd;
+
+            // const headers = { "Content-Type": "application/json" };
+
+            fetch("/api", { method: "POST", body })
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    console.log(data); // odesłane z serwera dane
+                })
+                .catch(function(error) {
+                    console.log(error); // ew błąd
+                });
+        }
+    </script>
+</body>
+
+</html>
