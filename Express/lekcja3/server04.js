@@ -5,7 +5,7 @@ const PORT = 3000
 const path = require("path")
 
 let logowania = []
-id = 1
+id = 0
 
 
 app.use(express.json());
@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "/static/formularz4.html"))
 })
 
-app.post("/form", (req, res)=>{
+app.post("/add", (req, res)=>{
     user = req.body
     user.id = id++
     console.log(user)
@@ -23,6 +23,13 @@ app.post("/form", (req, res)=>{
 
 
     res.header("content-type","application/json")
+    res.send(JSON.stringify(logowania, null, 5))
+})
+
+app.post("/del", (req, res)=>{
+    logowania = logowania.filter(l => l.id !== req.body.id)
+
+    res.header("content-type", "application/json")
     res.send(JSON.stringify(logowania, null, 5))
 })
 
