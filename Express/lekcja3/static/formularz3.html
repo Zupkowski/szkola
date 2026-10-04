@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz</title>
+</head>
+<body>
+    <input type="text" id="liczba1">
+    <input type="text" id="liczba2">
+    <select id="operation">
+        <option>suma</option>
+        <option>roznica</option>
+        <option>iloraz</option>
+        <option>iloczyn</option>
+        <option>wszystko</option>
+    </select>
+    <button id="submit">Wyślij</button><br>
+    <script>
+        document.getElementById("submit").onclick = function(){
+            const dane = {
+                a: Number(document.getElementById("liczba1").value),
+                b: Number(document.getElementById("liczba2").value),
+                op: document.getElementById("operation").value
+            };
+
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dane)
+            };
+            
+            fetch("/form", options)
+                .then(response => {
+                    // Krok A: serwer odpowiedział, dekodujemy odpowiedź z formatu JSON na zwykły obiekt JS
+                    return response.json();
+                })
+                .then(data => {
+                    // Krok B: tutaj mamy gotowe dane i możemy coś z nimi zrobić na stronie!
+                    window.alert(JSON.stringify(data, null, 5));
+                })
+                .catch(err => {
+                    // Wykona się tylko, jeśli wystąpił błąd (np. brak neta, serwer leży)
+                    console.error("Błąd:", err);
+                });
+        }
+    </script>
+</body>
+</html>

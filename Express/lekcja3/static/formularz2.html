@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz</title>
+</head>
+<body>
+    <button id="submit">Wyślij</button><br>
+    <script>
+        document.getElementById("submit").onclick = function(){
+            const dane = {
+                a: 10,
+                b: 20
+            };
+            const bodyJson = JSON.stringify(dane);
+
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: bodyJson
+            };
+            
+            fetch("/test", options)
+                .then(response => {
+                    // Krok A: serwer odpowiedział, dekodujemy odpowiedź z formatu JSON na zwykły obiekt JS
+                    return response.json();
+                })
+                .then(daneZSerwera => {
+                    // Krok B: tutaj mamy gotowe dane i możemy coś z nimi zrobić na stronie!
+                    window.alert("Serwer zwrócił:" + daneZSerwera);
+                })
+                .catch(err => {
+                    // Wykona się tylko, jeśli wystąpił błąd (np. brak neta, serwer leży)
+                    console.error("Błąd:", err);
+                });
+        }
+    </script>
+</body>
+</html>

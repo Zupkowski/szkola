@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz</title>
+    <style>
+        #r {
+            accent-color: red;
+        }
+        #g {
+            accent-color: green;
+        }
+        #b {
+            accent-color: blue;
+        }
+        #a {
+            accent-color: black;
+        }
+        #div {
+            width: 200px;
+            height: 200px;
+            background: rgb(255,128,128)
+        }
+    </style>
+</head>
+<body>
+    <input type="range" id="r" class="color" min="0" max="255" value="255"><br>
+    <input type="range" id="g" class="color" min="0" max="255" value="128"><br>
+    <input type="range" id="b" class="color" min="0" max="255" value="128"><br>
+    <input type="range" id="a" class="color" min="0" max="100" value="100"><br>
+    <div id="div"></div>
+
+    <script>
+        function kolorek() {
+            const values = {
+                red: r.value,
+                green: g.value,
+                blue: b.value,
+                a: a.value
+            }
+
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(values)
+            };
+            
+            fetch("/form", options)
+                .then(response => {
+                    // Krok A: serwer odpowiedział, dekodujemy odpowiedź z formatu JSON na zwykły obiekt JS
+                    return response.json();
+                })
+                .then(data => {
+                    // Krok B: tutaj mamy gotowe dane i możemy coś z nimi zrobić na stronie!
+                    document.getElementById("div").style.background = data
+                })
+                .catch(err => {
+                    // Wykona się tylko, jeśli wystąpił błąd (np. brak neta, serwer leży)
+                    console.error("Błąd:", err);
+                });
+        }
+        [document.getElementById("r"),document.getElementById("g"),document.getElementById("b"),document.getElementById("a")].forEach(f => f.oninput = kolorek)
+    </script>
+</body>
+</html>

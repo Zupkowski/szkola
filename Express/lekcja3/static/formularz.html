@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz</title>
+</head>
+<body>
+    <form action="/handleForm" method="post">
+        <input type="text" name="num1" placeholder="Pierwsza liczba" required><br>
+        <input type="text" name="num2" placeholder="Druga liczba" required><br>
+        <select name="operation">
+            <option value="+">suma</option>
+            <option value="-">roznica</option>
+            <option value="/">iloraz</option>
+            <option value="*">iloczyn</option>
+        </select><br>
+        <button type="submit">Wyślij</button><br>
+    </form>
+</body>
+</html>

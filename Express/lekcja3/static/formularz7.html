@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz</title>
+    <style>
+        .cont {
+            display: flex;
+        }
+        #left {
+            width: 400px;
+            height: 400px;
+            margin: 10px;
+            border-radius: 15px;
+            background: violet;
+            position: relative;
+        }
+        #right {
+            width: 400px;
+            height: 400px;
+            margin: 10px;
+            border-radius: 15px;
+            background: grey;
+            position: relative;
+        }
+        .circle {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 100%;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="check">jeden/wiele
+    <div class="cont">
+        <div id="left"></div>
+        <div id="right"></div>
+    </div>
+
+    <script>
+        function makeCircle(event) {
+            const circle = document.createElement("div")
+            circle.className = "circle"
+            circle.style.left = event.offsetX - 40 + "px"
+            circle.style.top = event.offsetY - 40 + "px"
+            circle.textContent = event.offsetX + ", " + event.offsetY
+            left.appendChild(circle)
+
+            const coords = {
+                x: event.offsetX - 40,
+                y: event.offsetY - 40,
+                date: Date.now()
+            }
+
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(coords)
+            };
+
+            fetch("/form", options)
+                .then(response => {
+                    // Krok A: serwer odpowiedział, dekodujemy odpowiedź z formatu JSON na zwykły obiekt JS
+                    return response.json();
+                })
+                .then(data => {
+                    // Krok B: tutaj mamy gotowe dane i możemy coś z nimi zrobić na stronie!
+                    const circle = document.createElement("div")
+                    circle.className = "circle"
+                    circle.style.left = coords.x + "px"
+                    circle.style.top = coords.y + "px"
+                    circle.style.fontSize = 40 + "px"
+                    circle.textContent = data.time
+                    right.appendChild(circle)
+                })
+                .catch(err => {
+                    // Wykona się tylko, jeśli wystąpił błąd (np. brak neta, serwer leży)
+                    console.error("Błąd:", err);
+                });
+        }
+
+        document.getElementById("left").onclick = function(event) {
+            if (!document.getElementById("check").checked) makeCircle(event)
+        }
+        document.getElementById("left").onmousemove = function(event) {
+            if (document.getElementById("check").checked) makeCircle(event)
+        }
+            
+        
+    </script>
+</body>
+</html>

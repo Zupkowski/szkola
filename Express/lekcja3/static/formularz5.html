@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz</title>
+</head>
+<body>
+    <input type="range" id="a">
+    <input type="range" id="b">
+
+    <script>
+        document.getElementById("a").oninput = function(){
+            const a_val = Number(a.value)
+
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({a: a_val})
+            };
+            
+            fetch("/form", options)
+                .then(response => {
+                    // Krok A: serwer odpowiedział, dekodujemy odpowiedź z formatu JSON na zwykły obiekt JS
+                    return response.json();
+                })
+                .then(data => {
+                    // Krok B: tutaj mamy gotowe dane i możemy coś z nimi zrobić na stronie!
+                    b.value = JSON.stringify(data.a)
+                })
+                .catch(err => {
+                    // Wykona się tylko, jeśli wystąpił błąd (np. brak neta, serwer leży)
+                    console.error("Błąd:", err);
+                });
+        }
+    </script>
+</body>
+</html>
