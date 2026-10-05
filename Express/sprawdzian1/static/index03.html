@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z03</title>
+</head>
+
+<body>
+    <h1>Z03: Paleta kolorów</h1>
+    <input type="color" id="color">
+    <input type="text" id="name">
+    <button type="submit" id="submit">Dodaj kolor</button>
+
+    <script>
+        const data = JSON.stringify({
+            color: document.getElementById("color").value,
+            name: document.getElementById("name").value
+        });
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: data
+        };
+        document.getElementById("submit").onclick = function () {
+            fetch("/kolor", options)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (serv) {
+                    alert(JSON.stringify(serv, null, 5));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    </script>
+</body>
+
+</html>
