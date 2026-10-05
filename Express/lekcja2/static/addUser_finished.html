@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addUser</title>
+</head>
+<body>
+    <h1>Dodaj usera</h1>
+
+    <form method="POST" action="/addUser">
+        nick:
+        <input type="text" name="nick" required>
+        email:
+        <input type="email" name="email" required>
+        <button type="submit">dodaj</button>
+    </form>
+
+    <p>
+        <a href="/removeUserBySelect">usuń: select</a> |
+        <a href="/removeUserByRadio">usuń: radio</a> |
+        <a href="/removeUserByCheckboxes">usuń: checkboxy</a> |
+        <a href="/users">podgląd JSON</a>
+    </p>
+</body>
+</html>
