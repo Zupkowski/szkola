@@ -6,6 +6,7 @@ Flask/aplikacje-serwerowe
 *.jpg
 *.png
 *.pptx
+*.zip
 **/node_modules
 **/WelcomeScreen/
 
