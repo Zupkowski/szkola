@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript - Lekcja 2 - Cwiczenie 2</title>
+    <script>
+        let array = eval(window.prompt("Podaj tablicę:", "[1,2,3,4,5]"));
+        let shift = window.prompt("Rotacja: p - prawo, l - lewo, k - koniec");
+        let shiftAm = shift.slice(0, shift.length-1)
+        let shiftDir = shift[shift.length-1].toLowerCase();
+        let arrayLen = array.length;
+        let finish = []
+
+        console.log(array)
+        if (shiftDir === "p") {
+            let counter = 0
+            for (let i=0; i<shiftAm; i++) {
+                counter++
+                if (i>arrayLen) {
+                    i=0
+                }
+                array.splice(0,0,array.pop())
+                console.log(array)
+                if (counter == shiftAm) {
+                    break
+                }
+            }
+        }
+        else if (shiftDir === "l") {
+            let counter = 0
+            let reversed = array.toReversed()
+            console.log(reversed)
+            for (let i=0; i<shiftAm; i++) {
+                counter++
+                if (i>arrayLen) {
+                    i=0
+                }
+                reversed.splice(0,0,reversed.pop())
+                if (counter == shiftAm) {
+                    break
+                }
+                let result = reversed.toReversed()
+                console.log(result)
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

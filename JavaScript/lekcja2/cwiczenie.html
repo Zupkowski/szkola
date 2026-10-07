@@ -7,12 +7,10 @@
     <script>
         // ZADANIE NR. 1
         let sentence = window.prompt("Podaj zdanie:");
-        let length = sentence.length
-        console.log(sentence.matchAll("a"));
 
-        for (i=0;i<length;i++) {
+        for (let i=0;i<sentence.length;i++) {
             let char = sentence.charAt(i);
-            if ("aiueoyąęó".includes(char)) {
+            if ("aiueoyąęó".includes(char.toLowerCase())) {
                 document.write("<font color='red'><b>"+char+"</b></font>");
             }
             else {
@@ -20,15 +18,55 @@
             }
         }
         // ZADANIE NR. 2
-        let array = eval(window.prompt("Podaj tablicę:"));
-        let shift = window.prompt("O ile przesunąć?");
-        let shiftAmount = 
+        let array = eval(window.prompt("Podaj tablicę:", "[1,2,3,4,5]"));
+        let shift = window.prompt("Rotacja: p - prawo, l - lewo, k - koniec");
+        let shiftAm = shift.slice(0, shift.length-1)
+        let shiftDir = shift[shift.length-1].toLowerCase();
         let arrayLen = array.length;
+        let finish = []
 
-        let koniec = array.slice(0,arrayLen-shiftAmount);
-        let poczatek = array.slice(arrayLen-shiftAmount,arrayLen);
-        let finish = poczatek.concat(koniec);
-        console.log(finish);
+        if (shiftDir === "p") {
+            // let begin = array.slice(0,arrayLen-shiftAm);
+            // let end = array.slice(arrayLen-shiftAm,arrayLen);
+            // finish = end.concat(begin);
+            console.log(array)
+            for (let i=1; i<=shiftAm; i++) {
+                // console.log("ITERACJA " + i) 
+                // console.log(Math.abs(arrayLen-i))               
+                // let begin = array.slice(0,Math.abs(arrayLen-i));
+                // let end = array.slice(Math.abs(arrayLen-i),arrayLen);
+                if (Math.abs(arrayLen-i)>arrayLen) {
+                    let begin = array.slice(0,Math.abs(arrayLen-i)-arrayLen);
+                    let end = array.slice(Math.abs(arrayLen-i)-arrayLen,arrayLen);
+                    console.log(end.concat(begin)); 
+                }
+                else {
+                    let begin = array.slice(0,Math.abs(arrayLen-i));
+                    let end = array.slice(Math.abs(arrayLen-i),arrayLen);
+                    console.log(end.concat(begin)); 
+                }
+            }   
+        }
+        else if (shiftDir === "l") {
+            // let begin = array.slice(0,shiftAm);
+            // let end = array.slice(shiftAm,arrayLen);
+            // finish = end.concat(begin);
+            console.log(array)
+            for (let i=1; i<=shiftAm; i++) {
+                console.log("ITERACJA " + i)
+                if (i > arrayLen) {
+                    let begin = array.slice(0,i-arrayLen);
+                    let end = array.slice(i-arrayLen,arrayLen);
+                    console.log(end.concat(begin)); 
+                }
+                else {
+                    let begin = array.slice(0,i);
+                    let end = array.slice(i,arrayLen);
+                    console.log(end.concat(begin));
+                }
+            }
+        }
+        // ZADANIE NR. 3
     </script>
 </head>
 <body>
