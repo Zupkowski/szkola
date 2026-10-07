@@ -9,4 +9,4 @@ Flask/aplikacje-serwerowe
 *.zip
 **/node_modules
 **/WelcomeScreen/
-
+ignoreme/
