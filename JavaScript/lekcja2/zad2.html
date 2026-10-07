@@ -10,39 +10,41 @@
         let shiftAm = shift.slice(0, shift.length-1)
         let shiftDir = shift[shift.length-1].toLowerCase();
         let arrayLen = array.length;
-        let finish = []
 
         console.log(array)
-        if (shiftDir === "p") {
-            let counter = 0
-            for (let i=0; i<shiftAm; i++) {
-                counter++
-                if (i>arrayLen) {
-                    i=0
-                }
-                array.splice(0,0,array.pop())
-                console.log(array)
-                if (counter == shiftAm) {
-                    break
+        while (shiftDir != "k") {
+            console.log(`--------------- ${shift} ---------------`)
+            if (shiftDir === "p") {
+                let counter = 0
+                for (let i=0; i<shiftAm; i++) {
+                    counter++
+                    if (i>arrayLen) {
+                        i=0
+                    }
+                    array.unshift(array.pop())
+                    if (counter > shiftAm) {
+                        break
+                    }
+                    console.log(array)
                 }
             }
-        }
-        else if (shiftDir === "l") {
-            let counter = 0
-            let reversed = array.toReversed()
-            console.log(reversed)
-            for (let i=0; i<shiftAm; i++) {
-                counter++
-                if (i>arrayLen) {
-                    i=0
+            else if (shiftDir === "l") {
+                let counter = 0
+                for (let i=0; i<shiftAm; i++) {
+                    counter++
+                    if (i>arrayLen) {
+                        i=0
+                    }
+                    array.push(array.shift())
+                    if (counter > shiftAm) {
+                        break
+                    }
+                    console.log(array)
                 }
-                reversed.splice(0,0,reversed.pop())
-                if (counter == shiftAm) {
-                    break
-                }
-                let result = reversed.toReversed()
-                console.log(result)
             }
+            shift = window.prompt("Rotacja: p - prawo, l - lewo, k - koniec");
+            shiftAm = shift.slice(0, shift.length-1)
+            shiftDir = shift[shift.length-1].toLowerCase();
         }
     </script>
 </head>
