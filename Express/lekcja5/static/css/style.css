@@ -1,0 +1,43 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+h1 {
+    width: 50%;
+    border-bottom: 2px solid cornflowerblue;
+    color: rgb(56, 56, 56);
+}
+
+.cont {
+    background: lightblue;
+    color: blue;
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+    height: 5rem;
+    font-size: 25px;
+}
+
+footer {
+    background: lightgrey;
+    color: grey;
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+    height: 2rem;
+    font-size: 15px;
+    text-align: center;
+    vertical-align: center;
+}
+
+.box {
+    background: lightgrey;
+    color: rgb(73, 123, 214);
+    font-weight: bold;
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 10px;
+    height: 2rem;
+    font-size: 25px;
+}

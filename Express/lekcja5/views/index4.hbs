@@ -1,0 +1,9 @@
+<h1>{{subject}}</h1>
+<form action="/handle04" method="get">
+    <select name="select" required size="3">
+        {{#each fields}}
+        <option>{{name}}</option>
+        {{/each}}
+    </select><br>
+    <button type="submit">WYŚWIETL</button>
+</form>
