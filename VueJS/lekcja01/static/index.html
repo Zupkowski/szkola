@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+
+        .lessonDiv {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .lesson {
+            background: rgb(91, 224, 91);
+            border-radius: 7.5px;
+            padding: 5px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            color: white;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lekcje VueJS</h1>
+    <script>
+        window.onload = () => {
+            const options = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+            fetch("/fetchme", options)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (res) {
+                    res.folders.forEach(f => {
+                        const select = document.createElement("select")
+                        select.id = "select"
+                        const lesson = document.createElement("div")
+                        lesson.id = f
+
+                        const title = document.createElement("h2")
+                        title.innerText = f
+
+                        lesson.append(title)
+
+                        res.lessons.forEach(l => {
+                            const button = document.createElement("a")
+                            button.className = "lesson"
+                            button.id = l
+                            button.innerText = l
+                            button.href = l
+                            lesson.append(button)
+                        })
+
+                        document.body.append(lesson)
+                    })
+                    // dodaj filtruj wedlug kategorii w selectcie wyswietlaja sie foldery
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    </script>
+</body>
+
+</html>
