@@ -1,0 +1,21 @@
+<h1>02: nedb - insert, sort</h1>
+<form action="/handle" method="GET">
+    <input type="text" name="login" placeholder="login" required>
+    <input type="text" name="password" placeholder="password" required>
+    <button type="submit">zapisz</button>
+</form>
+<p>{{ message }}</p>
+<table>
+    <tr>
+        <th>lp</th>
+        <th>login</th>
+        <th>password</th>
+    </tr>
+    {{#each users}}
+    <tr>
+        <td>{{index}}</td>
+        <td>{{login}}</td>
+        <td>{{password}}</td>
+    </tr>
+    {{/each}}
+</table>
