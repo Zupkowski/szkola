@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="text"></p>
+    <script>
+        let txt = prompt("Wklej zdanie:", "ten testowy tekst te sÅowa testowe testuje: te, ten, Bartek, potencjaÅ, plater. Te.")
+        let filter = prompt("Jaki wyraz podkreslic?", "Te").toLowerCase()
+        // document.getElementById("text").innerHTML = txt.replace(new RegExp('\\b' + filter + '\\b', 'vgi'), "<u>ABCDE</u>");
+        let result = []
+        let split = txt.split(" ")
+        split.forEach(e =>{
+            nowy = e.split(".")
+            nowy.forEach(e =>{
+                nowyNowy = e.split(",")
+                if (`${nowyNowy[0]}`.toLowerCase() == filter) {
+                    nowyNowy[0] = "<u>" + nowyNowy[0] + "</u>"
+                }
+
+                if (nowyNowy.length == 2) {
+                    nowyNowy[1] = ","
+                }
+                else if (nowyNowy[0] == "") {
+                    nowyNowy[0] = "."
+                }
+
+                console.log(nowyNowy)
+                response.push(result.concat(nowyNowy))
+            })
+        })
+
+    </script>
+</body>
+</html>
