@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function randColor() {
+            let rand = "#"
+            for (let i=0; i<6; i++) {
+                rand += Math.floor(Math.random()*16).toString(16)
+            }
+            return rand
+        }
+
+        let tekst = prompt("Wklej zdanie:", "W na i las, w na. To NIE świt ręka dom nie żaba. I KOT na łódź w łódź nie, las. Pies pies nie to zima na pies. Nie ogród, woda nie w woda. Dom kot to dom PIES ręka. Ćma dom, W i KOT. Ręka żaba, kot woda w i to. To i, i w, na i. Kot to zima NA, las. W i las, nie, dom.")
+        if (tekst) {
+            tekst = tekst.toLowerCase().replaceAll(".", "").replaceAll(",", "")
+            tekstArray = tekst.split(" ").sort()
+            lastWord = ""
+            returnArray = []
+            response = ""
+
+            console.log(tekstArray)
+
+            tekstArray.forEach(word => {
+                if (lastWord != word) {
+                    result = [word, 1]
+                    returnArray.push(result)
+                }
+                else {
+                    result[1] += 1
+                }
+                lastWord = word
+                
+            });
+
+            returnArray.sort((a, b) => {
+                if (a[1] != b[1]) return b[1] - a[1]
+                return a[0] < b[0] ? -1 : 1
+            })
+
+            console.log(returnArray)
+
+            for (let i=0; i<returnArray.length; i++) {
+                if (i%5 == 0) {
+                    color = randColor()
+                    response += "<span style='background: " + color + "'>" + returnArray[i][0] + " - " + returnArray[i][1] + "</span>" + "<br>"
+
+                    
+                }
+                else {
+                    response += "<span style='background: " + color + "'>" + returnArray[i][0] + " - " + returnArray[i][1] + "</span>" + "<br>"
+                }
+            }
+            document.body.innerHTML = response
+        }
+    </script>
+</body>
+</html>

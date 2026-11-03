@@ -6,33 +6,42 @@
     <title>Document</title>
 </head>
 <body>
-    <p id="text"></p>
     <script>
-        let txt = prompt("Wklej zdanie:", "ten testowy tekst te sÅowa testowe testuje: te, ten, Bartek, potencjaÅ, plater. Te.")
+        let txt = prompt("Wklej zdanie:", "ten testowy tekst te sąowa testowe testuje: te, ten, Bartek, potencjał, plater. Te.")
         let filter = prompt("Jaki wyraz podkreslic?", "Te").toLowerCase()
         // document.getElementById("text").innerHTML = txt.replace(new RegExp('\\b' + filter + '\\b', 'vgi'), "<u>ABCDE</u>");
         let result = []
-        let split = txt.split(" ")
-        split.forEach(e =>{
+        let textSplit = txt.split(" ")
+        console.log(textSplit)
+        textSplit.forEach(e =>{
             nowy = e.split(".")
+            if (nowy[1] == "") {
+                nowy[1] = "." 
+            }
             nowy.forEach(e =>{
                 nowyNowy = e.split(",")
+                if (nowyNowy[1] == "") {
+                    nowyNowy[1] = "," 
+                }
+                console.log(nowyNowy)
                 if (`${nowyNowy[0]}`.toLowerCase() == filter) {
                     nowyNowy[0] = "<u>" + nowyNowy[0] + "</u>"
                 }
 
                 if (nowyNowy.length == 2) {
-                    nowyNowy[1] = ","
+                    // nowyNowy[1] = " "
+                    nowyNowy = [nowyNowy[0]+","]
+                    result += " " + nowyNowy
                 }
-                else if (nowyNowy[0] == "") {
-                    nowyNowy[0] = "."
+                else if (nowyNowy[0] == ".") {
+                    result += nowyNowy[0]
                 }
-
-                console.log(nowyNowy)
-                response.push(result.concat(nowyNowy))
+                else {
+                    result += " " + nowyNowy
+                }
             })
         })
-
+        document.body.innerHTML = result
     </script>
 </body>
 </html>
