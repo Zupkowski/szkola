@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea id="textfield" rows="15" cols="40" readonly style="resize: none;"></textarea>
+    <script>
+        // ZMIENNE DO DOSTOSOWYWANIA DZIAŁANIA PROGRAMU
+        const probability = 0.05 //ustawianie prawdopodobienstwa wylosowania litery na poszczegolnych miejscach
+        const interval = 300 //czestotliwość losowania nowego rzędu
+
+        const field = document.getElementById("textfield")
+
+        function randLetter() {  
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+            return letters[Math.floor(Math.random() * letters.length)];
+        }
+
+        function makeRow() {
+            let row = []
+            for (let j=0; j<field.cols; j++) {
+                if (Math.random() < probability) {
+                    row.push(randLetter())
+                }
+                else {
+                    row.push(" ")
+                }
+            }
+            return row
+        }
+        function displayTable() {
+            let counter = 0
+            let rows = []
+            let textTemp = ""
+            field.innerHTML = rows.join("\n")
+            const down = setInterval(()=>{
+                if (counter < field.rows) {
+                    rows.unshift(makeRow().join(""))     
+                }
+                else {
+                    rows.unshift(" ")
+                    rows.pop()    
+                }
+                field.innerHTML = ""
+                field.innerHTML = rows.join("\n")
+                counter++
+                // console.log(counter)
+                if (counter > 2*field.rows) {
+                    clearInterval(down)
+                    displayTable()
+                }
+            },interval)
+        }
+        
+        displayTable()
+    </script>
+</body>
+</html>

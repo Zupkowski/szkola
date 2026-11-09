@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="image.png" style="width: 500px;" id="image">
+    <script>
+        let image = document.images[0];
+        let width = parseInt(image.style.width)
+        let flag = true
+        setInterval(() => {
+            if (width >= 1000 || width <= 100) flag = !flag;
+
+            if (flag) width+= 100;
+            else width-=100;
+            console.log(width);
+            image.style.width = width + "px";
+        }, 150)
+    </script>
+</body>
+</html>

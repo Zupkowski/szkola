@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" value="          Tak, umiem to zrobić. Trzeba się uczyć." id="textfield" readonly size="15">
+    <script>
+        let field = document.getElementById("textfield")
+        setInterval(() => {
+            let tekst = field.value
+            field.value = tekst.concat(tekst.slice(0,1)).slice(1);
+        }, 100)
+
+    </script>
+</body>
+</html>
