@@ -5,6 +5,7 @@ Flask/aplikacje-serwerowe
 *.pdf
 *.jpg
 *.png
+*.gif
 *.pptx
 *.zip
 **/node_modules
