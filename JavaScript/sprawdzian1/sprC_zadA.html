@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function pent(N) {
+            const result = [0, 1, 1, 2, 4]
+            for (let i = 5; i < N; i++) {
+                result.push(result[i-1] + result[i-2] + result[i-3] + result[i-4] + result[i-5])
+            }
+            return result.slice(0, N)
+        }
+        console.log(pent(3))
+    </script>
+</body>
+</html>

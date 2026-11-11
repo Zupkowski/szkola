@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .box {
+            padding: 10px 10px;
+            width: 50px;
+            height: 20px;
+            text-align: center;
+            border: 1px solid black;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <input type="number" value="5" id="n">
+    <button id="btn">Odliczaj</button>
+    <div id="box" class="box">0</div>
+    <script>
+        n = document.getElementById("n")
+        btn = document.getElementById("btn")
+        box = document.getElementById("box")
+
+        btn.addEventListener("click", ()=>{
+            let num = n.value
+            box.innerHTML = num
+            const countdown = setInterval(()=>{
+                num--
+                box.innerHTML = num
+                if (num <= 0) {
+                    clearInterval(countdown)
+                }
+            }, 1000)
+        })
+    </script>
+</body>
+</html>

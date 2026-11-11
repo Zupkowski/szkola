@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3 id="count">Punkty: 0</h3>
+    <script>
+        const body = document.body
+        const count = document.getElementById("count")
+        let numbers = []
+        let primes = []
+        let others = []
+        let used = []
+        let counter = 0
+
+        function randNum() {
+            return Math.floor(Math.random()*100)+1
+        }
+        function randPrime() {
+            let num = randNum()
+            let count = 0
+            for (let i = 1; i <= num; i++) {
+                if (num % i == 0) {
+                    count++
+                }
+            }
+            if (count == 2) {
+                return num
+            }
+            return randPrime()
+        }
+        function randOther() {
+            let num = randNum()
+            let count = 0
+            for (let i = 1; i <= num; i++) {
+                if (num % i == 0) {
+                    count++
+                }
+            }
+            if (count != 2 && num % 2 != 0) {
+                return num
+            }
+            return randOther()    
+        }
+        function randPos() {
+            return Math.floor(Math.random()*20)
+        }
+
+        while (primes.length < 5) {
+            const p = randPrime()
+            if (!primes.includes(p)) primes.push(p)
+        }
+        while (others.length < 15) {
+            const o = randOther()
+            if (!others.includes(o)) others.push(o)
+        }
+
+        numbers = primes.concat(others)
+
+        function primesFunction() {
+            counter++
+            this.style.background = "lime"
+            count.innerText = `Punkty: ${counter}`
+            this.removeEventListener("click", primesFunction)
+            this.disabled = true
+        }
+
+        function othersFunction() {
+            counter--
+            this.style.background = "pink"
+            count.innerText = `Punkty: ${counter}`
+            this.removeEventListener("click", othersFunction)
+            this.disabled = true
+        }
+
+        for (let i=0; i<20; i++) {
+            let pos = randPos()
+            const button = document.createElement("button")
+            while (used.includes(pos)) {
+                pos = randPos()
+            }
+            used.push(pos)
+            button.innerText = numbers[pos]
+            if ([0,1,2,3,4].includes(pos)) {
+                button.addEventListener("click", primesFunction)
+            }
+            else {
+                button.addEventListener("click", othersFunction)
+            }
+            body.appendChild(button)
+        }
+    </script>
+</body>
+</html>

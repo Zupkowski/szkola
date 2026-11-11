@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #image {
+            width: 150px;
+        }
+        br {margin-bottom: 10px;}
+    </style>
+</head>
+<body>
+    <input type="number" value="10" id="deg" min="1" max="360">
+    <button id="start">START</button>
+    <button id="stop">STOP</button>
+    <input type="checkbox" id="check" name="check"><label for="check">OBRACAJ W NIESKOŃCZONOŚĆ</label>
+    <br>
+    <img src="grafiki/image.png" id="image">
+    <script>
+        const deg = document.getElementById("deg")
+        const start = document.getElementById("start")
+        const stop = document.getElementById("stop")
+        const infinite = document.getElementById("check")
+        const img = document.getElementById("image")
+        let rotate = ""
+
+        function rotateImg() {
+            clearInterval(rotate)
+            const step = parseInt(deg.value)
+            let val = 0
+            img.style.transform = "rotate(0deg)"
+            rotate = setInterval(()=>{
+                console.log(val)
+                val += step
+                if (!infinite.checked && val >= 360) {
+                    clearInterval(rotate)
+                }
+                img.style.transform = `rotate(${val}deg)`
+            }, 250)
+        }
+
+        start.addEventListener("click", rotateImg)
+        stop.addEventListener("click", ()=>{clearInterval(rotate)})
+
+    </script>
+</body>
+</html>

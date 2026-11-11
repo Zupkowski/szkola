@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 400px;
+            height: 400px;
+            padding: 50px;
+            border: 1px solid black;
+            margin-top: 8px;
+            position: relative;
+        }
+        .square {
+            position: absolute;
+            box-sizing: border-box;
+            background: cornflowerblue;
+            border: 1px solid blue;
+            box-shadow: 2px 4px 12px darkblue;
+        }
+    </style>
+</head>
+<body>
+    <input type="number" id="n" value="14" required>
+    <button id="create">Generuj</button>
+    <div id="box"></div>
+    <script>
+        const create = document.getElementById("create")
+        const box = document.getElementById("box")
+
+        function randPos() {
+            return Math.floor(Math.random()*400) + "px"
+        }
+        function randSize() {
+            let rand = 0
+            while (rand < 10) {
+                rand = Math.floor(Math.random()*100)
+            }
+            return rand + "px"
+        }
+
+        create.addEventListener("click", ()=>{
+            let n = document.getElementById("n").value
+            box.innerHTML = ""
+            let pos = []
+            for (let i=0; i<n; i++) {
+
+                pos.push([randPos(), randPos(), randSize()])
+
+
+                let size = randSize()
+                let square = document.createElement("div")
+                square.classList.add("square")
+                square.style.width = pos[i][2]
+                square.style.height = pos[i][2]
+                square.style.left = pos[i][0];
+                square.style.top = pos[i][1];
+                box.append(square)
+            }
+            console.log(pos)
+            // for (let i=0; i<n; i++) {
+            //     let size = randSize()
+            //     let square = document.createElement("div")
+            //     square.classList.add("square")
+            //     square.style.width = size
+            //     square.style.height = size
+            //     square.style.left = randPos();
+            //     square.style.top = randPos();
+            //     box.append(square)
+            // }
+        })
+    </script>
+</body>
+</html>

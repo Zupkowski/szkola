@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function textStats(txt) {
+            result = []
+            upperCount = 0
+            txt = txt.split(" ")
+            txt.forEach(word => {
+                result.push(word.split(","))
+            });
+            result.forEach(word => {
+                if (word[0].charAt(0) == word[0].charAt(0).toUpperCase()) {
+                    upperCount++
+                }
+            })
+
+            return `Słów: ${result.length}, z dużej litery: ${upperCount}`
+        }
+    
+        console.log(textStats("Ala ma kota, a kot ma Ale"))
+    </script>
+</body>
+</html>

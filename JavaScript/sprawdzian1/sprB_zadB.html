@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .circle {
+            background: white;
+            border: 1px solid black;
+            border-radius: 50%;
+            box-sizing: border-box;
+            position: absolute;
+        }
+        .box {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            box-sizing: border-box;
+            background: lightgray;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    <script>
+        const circles = document.getElementsByClassName("circle")
+
+        function randSize() {
+            return Math.floor(Math.random()*30)+10
+        }
+        function randPos(size) {
+            return Math.floor(Math.random()*(500-size))
+        }
+
+        for (let i=0; i<10; i++) {
+            const c = circles[i]
+            let size = randSize()
+            c.style.width = size + "px"
+            c.style.height = size + "px"
+            c.style.left = randPos(size) + "px"
+            c.style.top = randPos(size) + "px"
+
+            let timer = null
+
+            c.addEventListener("click", () => {
+                if (timer) return
+                timer = setInterval(() => {
+                    const max = 498 - size
+                    const y = parseInt(c.style.top) + 3
+
+                    if (y >= max) {
+                        c.style.top = max + "px"
+                        clearInterval(timer)
+                        timer = null
+                    } else {
+                        c.style.top = y + "px"
+                    }
+                }, 25)
+            })
+        }
+        console.log(randSize())     
+    </script>
+</body>
+</html>

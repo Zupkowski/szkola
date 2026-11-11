@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .kula {
+            background: blue;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            color: white;
+            font-size: 25px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="kula" id="kula">KULA</div>
+    <script>
+        const kula = document.getElementById("kula")
+        let size=150
+        let grow = ""
+        let shrink = ""
+
+        kula.addEventListener("mousedown", ()=>{
+            clearInterval(shrink)
+            grow = setInterval(()=>{
+                size += 1
+                kula.style.width = size + "px"
+                kula.style.height = size + "px"
+                if (size == 300) {
+                    clearInterval(grow)
+                    kula.innerText = "POWER MAX!"
+                }
+            }, 25)
+        })
+        kula.addEventListener("mouseup", ()=>{
+            clearInterval(grow)
+            kula.innerText = "KULA"
+            shrink = setInterval(()=>{
+                size -= 1
+                kula.style.width = size + "px"
+                kula.style.height = size + "px"
+                if (size == 150) {
+                    clearInterval(shrink)
+                }
+            }, 25)
+        })
+
+
+    </script>
+</body>
+</html>

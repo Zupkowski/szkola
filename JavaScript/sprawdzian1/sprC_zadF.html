@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 75px;
+        }
+    </style>
+</head>
+<body>
+    <button id="prev">PREV</button>
+    <img src="grafiki/1.png" id="0">
+    <img src="grafiki/2.png" id="1">
+    <img src="grafiki/3.png" id="2">
+    <img src="grafiki/4.png" id="3">
+    <img src="grafiki/5.png" id="4">
+    <button id="next">NEXT</button>
+    <script>
+        const prev = document.getElementById("prev")
+        const next = document.getElementById("next")
+        let grafiki = ["grafiki/1.png", "grafiki/2.png", "grafiki/3.png", "grafiki/4.png", "grafiki/5.png"]
+        let count = 0
+
+        prev.addEventListener("click", ()=>{
+            if (count == -5) {
+                count = 0
+                window.alert("Odwrócono całość w lewo")
+            }
+            else {
+                count--
+                grafiki.push(grafiki.shift())
+                for (let i=0; i<5; i++) {
+                    document.getElementById(i).src = grafiki[i]
+                }
+                
+            }
+            console.log(count)
+        })
+        next.addEventListener("click", ()=>{
+            if (count == 5) {
+                count = 0
+                window.alert("Odwrócono całość w prawo")
+            }
+            else {
+                count++
+                grafiki.unshift(grafiki.pop())
+                for (let i=0; i<5; i++) {
+                    document.getElementById(i).src = grafiki[i]
+                }
+                
+            }
+            console.log(count)
+        })
+
+    </script>
+</body>
+</html>

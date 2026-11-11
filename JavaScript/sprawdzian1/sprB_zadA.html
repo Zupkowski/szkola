@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fiboDesc(N) {
+            let result = []
+            let a = 0
+            let b = 1
+            for (let i=0; i<N; i++) {
+                result.push(a)
+                let c = b
+                b = a
+                a = b + c
+            }
+            return result.reverse()
+        }
+
+        console.log(fiboDesc(8))
+    </script>
+</body>
+</html>

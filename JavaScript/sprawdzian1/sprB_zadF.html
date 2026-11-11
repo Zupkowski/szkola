@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mainBox, .square {
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .mainBox {
+            width: 500px;
+            height: 500px;
+            border: 2px solid black;
+            background: white;
+        }
+        .square {
+            background: white;
+            border: 1px solid grey;
+        }
+    </style>
+</head>
+<body>
+    Podaj liczbę N:<input type="number" id="count" min="2" max="10" value="3">
+    <button id="start">Start</button>
+    <div id="mainBox" class="mainBox"></div>
+    <script>
+        const main = document.getElementById("mainBox")
+        const count = document.getElementById("count")
+        const start = document.getElementById("start")
+
+        function randSize(prevSize) {
+            return (Math.floor(Math.random()*26)+50)*prevSize/100
+        }
+        function randColor() {
+            const colors = ["red", "limegreen", "royalblue", "orange", "magenta"]
+            return colors[Math.floor(Math.random()*5)]
+        }
+        
+        function clearAll() {
+            main.querySelectorAll(".square").forEach(s => s.style.background = "")
+        }
+
+        function makeSq() {
+            const n = count.value
+            let prevEl = main
+            let prevSize = 500
+            main.innerHTML = ""
+            for (let i=0; i<n; i++) {
+                const size = randSize(prevSize)
+                const div = document.createElement("div")
+                div.className = "square"
+                div.style.width = size + "px"
+                div.style.height = size + "px"
+                prevEl.append(div)
+                prevEl = div
+                prevSize = size
+            }
+        }
+        main.addEventListener("mouseover", (e) => {
+            clearAll()
+            if (e.target.classList.contains("square")) {
+                e.target.style.background = randColor()
+            }
+        })
+        main.addEventListener("mouseleave", clearAll)
+
+        start.addEventListener("click", makeSq)
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .itemCont {
+
+        }
+    </style>
+</head>
+<body>
+    <h3>Lista zakupów</h3>
+    <input type="text" id="item" placeholder="Wpisz nazwę produktu" required>
+    <button id="add">Dodaj</button>
+    <ul id="list"></ul>
+    <script>
+        const item = document.getElementById("item")
+        const add = document.getElementById("add")
+        const listBox = document.getElementById("list")
+        let list = []
+
+        add.addEventListener("click", ()=>{
+            let itemName = item.value
+        
+            const itemLi = document.createElement("li")
+            itemLi.className = "itemCont"
+            itemLi.innerHTML = `<p>${itemName}</p>`
+
+            const completeButton = document.createElement("button")
+            completeButton.innerText = "Comlete"
+            completeButton.addEventListener("click", ()=>{
+                completeButton.parentElement.firstChild.innerHTML = `<p><s>${itemName}</s></p>`
+            })
+
+            itemLi.append(completeButton)
+
+            const deleteButton = document.createElement("button")
+            deleteButton.innerText = "Delete"
+            deleteButton.addEventListener("click", ()=>{
+                completeButton.parentElement.remove()
+            })
+            
+            itemLi.append(deleteButton)
+
+            document.getElementById("list").append(itemLi)
+            
+
+        })
+
+    </script>
+</body>
+</html>

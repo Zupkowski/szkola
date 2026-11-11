@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        * {
+            margin: 10px;
+        }
+        .box {
+            background: gray;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="test"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <script>
+        function randColor() {
+            return "#"+Math.floor(Math.random()*16777215).toString(16)
+        }
+        let box = document.querySelectorAll(".box")
+
+        for (let i=0; i<box.length; i++) {
+            box[i].addEventListener("click", ()=>{
+                if (!box[i].classList.contains("checked")) {
+                    
+                        box[i].style.background = randColor()
+                        box[i].classList.add("checked")
+                }
+            })
+            box[i].addEventListener("dblclick", ()=>{
+                box.forEach(e => {
+                    e.style.background = ""
+                    e.classList.remove("checked")     
+                });
+            })
+        }
+
+        console.log(randColor())
+    </script>
+</body>
+</html>

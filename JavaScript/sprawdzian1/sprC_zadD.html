@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .playBox {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            position: relative;
+        }
+        .dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h3 id="score">Wynik: 0</h3>
+    <div id="playBox" class="playBox">
+        <div id="dot" class="dot"></div>
+    </div>
+    <script>
+        const playBox = document.getElementById("playBox")
+        const dot = document.getElementById("dot")
+        const score = document.getElementById("score")
+        let scoreCount = 0
+
+        function randColor() {
+            let color = "#"
+            for (let i=0; i<6; i++) {
+                color += Math.floor(Math.random()*16).toString(16)
+            }
+            return color
+        }
+        function randPos() {
+            return Math.floor(Math.random()*470) + "px"
+        }
+        function changePosCol() {
+            dot.style.left = randPos()
+            dot.style.top = randPos()
+            dot.style.background = randColor()
+        }
+
+        changePosCol()
+        let changePos = setInterval(changePosCol, 1000)
+        dot.addEventListener("click", ()=>{
+            clearInterval(changePos)
+            changePos = ""
+            scoreCount++
+            score.innerHTML = `Wynik: ${scoreCount}`
+            changePosCol()
+            changePos = setInterval(changePosCol, 1000)
+            
+        })
+
+    </script>
+</body>
+</html>

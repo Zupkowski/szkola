@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			function spiralEncrypt(txt) {
+				let n = Math.ceil(Math.sqrt(txt.length));
+				let tekst = (txt += "_".repeat(n * n - txt.length));
+				let spiralArray = [];
+				for (let i = 0; i < n; i++) {
+					spiralArray.push([]);
+				}
+				let top = 0;
+				let bottom = n - 1;
+				let left = 0;
+				let right = n - 1;
+				let steps = 0;
+				while (top <= bottom && left <= right) {
+					for (let i = left; i <= right; i++) {
+						spiralArray[top][i] = tekst[steps];
+						steps++;
+					}
+					top++;
+					for (let i = top; i <= bottom; i++) {
+						spiralArray[i][right] = tekst[steps];
+						steps++;
+					}
+					right--;
+					for (let i = right; i >= left; i--) {
+						spiralArray[bottom][i] = tekst[steps];
+						steps++;
+					}
+					bottom--;
+					for (let i = bottom; i >= top; i--) {
+						spiralArray[i][left] = tekst[steps];
+						steps++;
+					}
+					left++;
+				}
+				return spiralArray.flat().join("")
+			}
+		</script>
+	</body>
+</html>

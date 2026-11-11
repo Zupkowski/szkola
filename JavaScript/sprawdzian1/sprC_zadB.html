@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .pasek {
+            margin-top: 10px;
+            width: 300px;
+            height: 30px;
+            border: 1px solid black;
+            background: rgb(240, 240, 240);
+        }
+        .load {
+            height: 30px;
+            width: 0;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <button id="start">Start</button>
+    <div class="pasek"><div id="load" class="load"></div></div>
+    <p id="tekst" hidden><b>Zakończono!</b></p>
+    <script>
+        const btn = document.getElementById("start")
+        const load = document.getElementById("load")
+        const tekst = document.getElementById("tekst") 
+        let loading = null
+
+
+
+        btn.addEventListener("click", ()=>{
+            clearInterval(loading)
+            load.style.width = "0"
+            tekst.hidden = true
+            let counter = 0
+
+            loading = setInterval(()=>{
+                load.style.width = counter + "%"
+                if (counter >= 100) {
+                    clearInterval(loading)
+                    tekst.hidden = false
+                }
+                counter++
+            },50)
+
+        })
+    </script>
+</body>
+</html>

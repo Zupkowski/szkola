@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function rotateString(str,n) {
+            let text = str.toLowerCase().split("")
+            let result = []
+            const alphabet = "abcdefghijklmnopqrstuvwxyz".split("")
+            
+            text.forEach(e => {
+                if (e == " ") {
+                    result.push(" ")
+                }
+                else {
+                    let index = alphabet.indexOf(e)
+                    index += n
+                    if (index > 25) {
+                        index -= 26
+                    }
+                    else if (index < 0) {
+                        index += 26
+                    }
+                    result.push(alphabet[index])
+                }
+            });
+
+            return result.join("")
+        }
+    </script>
+</body>
+</html>

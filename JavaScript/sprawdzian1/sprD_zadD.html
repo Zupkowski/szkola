@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 500px;
+            height: 500px;
+            border: 2px solid black;
+            position: relative;
+            box-sizing: border-box;
+            
+        }
+        .cyferka {
+            width: 50px;
+            position: absolute;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" class="box"></div>
+    <script>
+        const box = document.getElementById("box")
+        let counter = 1
+        
+        function randTop() {
+            return Math.floor(Math.random()*420)
+        }
+        function randLeft() {
+            return Math.floor(Math.random()*450)
+        }
+
+        function clickAction() {
+            const id = parseInt(this.id)
+            if (id == counter) {
+                counter++
+                this.style.visibility = "hidden"
+            }
+            else {
+                alert("Zła kolejność! Spróbuj ponownie")
+                mainGame()
+            }
+
+            if (counter == 6) {
+                this.style.visibility = "hidden"
+                setTimeout(()=>{
+                    alert("Ukończono!") 
+                    mainGame()
+                }, 0)
+            }
+        }
+        function mainGame() {
+            box.innerHTML = ""
+            counter = 1
+            for (let i=1; i<=5; i++) {
+                const num = document.createElement("img")
+                num.src = `grafiki/${i}.png`
+                num.className = "cyferka"
+                num.style.left = randLeft() + "px"
+                num.style.top = randTop() + "px"
+                num.id = i
+
+                num.addEventListener("click", clickAction)
+                box.appendChild(num)
+            }
+        }
+
+        mainGame()
+    </script>
+</body>
+</html>
