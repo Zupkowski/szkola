@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Paź 01, 2026 at 12:36 PM
--- Wersja serwera: 12.0.2-MariaDB-log
--- Wersja PHP: 8.3.25
+-- Generation Time: Lis 11, 2026 at 11:09 PM
+-- Wersja serwera: 12.1.2-MariaDB-log
+-- Wersja PHP: 8.3.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,23 +29,24 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `kraje` (
   `id` int(3) NOT NULL,
-  `nazwa` varchar(100) NOT NULL
+  `nazwa` varchar(100) NOT NULL,
+  `filename` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kraje`
 --
 
-INSERT INTO `kraje` (`id`, `nazwa`) VALUES
-(1, 'Albania'),
-(2, 'Algieria'),
-(3, 'Australia'),
-(4, 'Barbados'),
-(5, 'Belgia'),
-(6, 'Belize'),
-(7, 'Bermudy'),
-(8, 'Bhutan'),
-(9, 'Boliwia');
+INSERT INTO `kraje` (`id`, `nazwa`, `filename`) VALUES
+(1, 'Albania', 'Albania.jpg'),
+(2, 'Algieria', 'Algieria.jpg'),
+(3, 'Australia', 'Australia.jpg\r\n'),
+(4, 'Barbados', 'Barbados.jpg'),
+(5, 'Belgia', 'Belgia.jpg'),
+(6, 'Belize', 'Belize.jpg'),
+(7, 'Bermudy', 'Bermudy.jpg'),
+(8, 'Bhutan', 'Bhutan.jpg'),
+(9, 'Boliwia', 'Boliwia.jpg');
 
 -- --------------------------------------------------------
 
@@ -61,6 +62,17 @@ CREATE TABLE `main` (
   `stop_id` int(2) NOT NULL,
   `rok` year(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `main`
+--
+
+INSERT INTO `main` (`id`, `kraj_id`, `nominal`, `nr_kat`, `stop_id`, `rok`) VALUES
+(40, 1, 'lek', 'km#37', 1, '1999'),
+(41, 3, 'funt', 'km#32', 6, '1949'),
+(42, 3, 'dollar', 'km#33', 11, '1950'),
+(43, 8, 'ngultrum', 'km#49', 5, '1978'),
+(44, 9, 'boliviano', 'km#205', 10, '1997');
 
 -- --------------------------------------------------------
 
@@ -128,7 +140,7 @@ ALTER TABLE `kraje`
 -- AUTO_INCREMENT for table `main`
 --
 ALTER TABLE `main`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `stopy`
