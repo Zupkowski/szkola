@@ -1,0 +1,22 @@
+{
+  "database-client.autoSync": true,
+  "remote.SSH.remotePlatform": {
+    "REDACTED!!!": "linux",
+  },
+  "remote.SSH.connectTimeout": 1800,
+  "remote.SSH.serverShutdownTimeout": 28800,
+  "remote.SSH.reconnectionGraceTime": 28800,
+  "remote.SSH.maxReconnectionAttempts": null,
+  "workbench.colorTheme": "One Dark Pro Monokai Darker",
+  "files.autoSave": "afterDelay",
+  "editor.mouseWheelZoom": true,
+  "js/ts.experimental.useTsgo": true,
+  "gitlens.graph.details.location": "auto",
+  "python.createEnvironment.trigger": "off",
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.fontFamily": "JetBrains Mono",
+  "open-in-browser.default": "Firefox",
+  "cSpell.language": "en,pl-PL",
+}
