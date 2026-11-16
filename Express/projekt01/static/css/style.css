@@ -1,0 +1,55 @@
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: rgb(245, 245, 245);
+}
+
+.page-title {
+  color: dodgerblue;
+}
+
+.main-nav {
+  background: rgb(55, 55, 55);
+  padding: 0.25rem 1.25rem;
+}
+.main-list {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+.main-list-item {
+  list-style-type: none;
+}
+.main-list-link {
+  text-decoration: none;
+  color: white;
+}
+.main-list-link-index {
+  font-weight: bold;
+  color: palevioletred;
+  margin-right: 1rem;
+  font-size: 1.2rem;
+}
+
+.button-submit {
+  background: ForestGreen;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+form {
+  background: white;
+  box-shadow: 0.1rem 0.1rem 0.4rem lightgrey;
+  padding: 1.25rem 1rem;
+  border-radius: 0.5em;
+}
+
+hr {
+  color: lightgrey;
+}
