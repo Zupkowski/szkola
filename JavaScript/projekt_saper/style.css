@@ -8,12 +8,9 @@
 
 #generateButton {
   background: none;
-
   border: 1px solid black;
   border-radius: 4px;
-
   padding: 2px 10px;
-
   cursor: pointer;
 }
 
@@ -34,5 +31,4 @@ img {
 
 .tile {
   cursor: pointer;
-  
 }

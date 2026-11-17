@@ -1,13 +1,16 @@
 <h3 class="page-title">add car page</h3>
-<hr />
 <form action="/add" method="post">
+  <div class="add-msg">new car (Model:
+    {{model}}) with id =
+    {{id}}
+    added to database</div>
   <label for="ubezpieczony">Ubezpieczony</label>
   <input type="checkbox" name="ubezpieczony" /><br />
   <label for="benzyna">Benzyna</label>
   <input type="checkbox" name="benzyna" /><br />
   <label for="uszkodzony">Uszkodzony</label>
   <input type="checkbox" name="uszkodzony" /><br />
-  <label for="4x4">Napęd 4x4</label>
-  <input type="checkbox" name="4x4" /><br />
+  <label for="naped4x4">Napęd 4x4</label>
+  <input type="checkbox" name="naped4x4" /><br />
   <button type="submit" class="button-submit">ADD</button>
 </form>

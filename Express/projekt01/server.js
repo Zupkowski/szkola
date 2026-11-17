@@ -10,7 +10,14 @@ const hbs = create({
   extname: ".hbs", // rozszerzenie plików szablonów
 });
 
-const cars = ["Astra", ""];
+const Datastore = require("@seald-io/nedb");
+
+const db = new Datastore({
+  filename: "db/cars.db",
+  autoload: true,
+});
+
+const cars = ["Astra", "Golf", "Prius", "Jeep"];
 
 app.use(express.static(path.join(__dirname, "static")));
 
@@ -22,31 +29,43 @@ app.use(
 
 app.engine(".hbs", hbs.engine); // określenie silnika szablonów
 app.set("view engine", ".hbs");
-app.set("views", path.join(__dirname, "views")); // ustalamy katalog views
+app.set("views", path.join(__dirname, "views"));
 
+//obsluga strony index
 app.get("/", function (req, res) {
-  res.render("index.hbs"); // nie podajemy ścieżki tylko nazwę pliku
+  res.render("index.hbs");
 });
 
+//obsluga strony add
 app.get("/add", function (req, res) {
-  res.render("add.hbs"); // nie podajemy ścieżki tylko nazwę pliku
-});
-
-app.get("/list", function (req, res) {
-  res.render("add.hbs"); // nie podajemy ścieżki tylko nazwę pliku
-});
-
-app.get("/delete", function (req, res) {
-  res.render("add.hbs"); // nie podajemy ścieżki tylko nazwę pliku
-});
-
-app.get("/edit", function (req, res) {
-  res.render("add.hbs"); // nie podajemy ścieżki tylko nazwę pliku
+  res.render("add.hbs");
 });
 
 app.post("/add", (req, res) => {
-  console.log(req.body);
+  const carObj = {
+    model: cars[Math.floor(Math.random() * 4)],
+    ubezpieczony: req.body.ubezpieczony == "on" ? "TAK" : "NIE",
+    benzyna: req.body.benzyna == "on" ? "TAK" : "NIE",
+    uszkodzony: req.body.uszkodzony == "on" ? "TAK" : "NIE",
+    naped4x4: req.body.naped4x4 == "on" ? "TAK" : "NIE",
+  };
+  db.insert(carObj, function (err, car) {
+    const context = { model: car.model, id: car._id };
+    res.render("add.hbs", context);
+  });
 });
+
+// app.get("/list", function (req, res) {
+//   res.render("list.hbs");
+// });
+
+// app.get("/delete", function (req, res) {
+//   res.render("delete.hbs");
+// });
+
+// app.get("/edit", function (req, res) {
+//   res.render("edit.hbs");
+// });
 app.listen(PORT, function () {
   console.log("port " + PORT);
 });
