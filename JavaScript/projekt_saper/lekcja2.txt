@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 100vh;
+        }
+    </style>
+    <script>
+        function test() {
+            console.log("dbl");
+        }
+
+        function kl(dys) {
+            dys.innerHTML = "test"
+        }
+
+        function init() {
+            /*
+            console.log("init", this); // window
+            console.log("onload", document.body)
+            const els = document.getElementsByClassName("test");
+            els[0].onclick = function () {
+                console.log(this); // element
+                this.innerText = "Anna";
+            }
+
+            els[0].onclick = (e) => {
+                console.log(this, e); // window
+                e.target.innerText = "Anna";
+            }
+                */
+
+            /*
+            els[0].onclick = function () { // ta technika nadpisuje poprzednio dodane zdarzenie tego samego typu
+                console.log("next event click");
+            }
+
+            els[0].onclick = null;
+            */
+
+            // Listenery
+
+            const outer = document.getElementById("outer");
+            outer.addEventListener("click", (e) => {
+                console.log("outer", e.target)
+
+            }, false);
+            // removeEventListener
+
+
+            const inner = document.getElementById("inner");
+            inner.addEventListener("click", (e) => {
+                console.log("inner", e.target)
+                e.stopPropagation();
+            }, false);
+
+            inner.addEventListener("click", (e) => { // zdarzenie sie dodaje jako kolejne
+                console.log("Zd.2");
+            }, false);
+        }
+    </script>
+</head>
+
+<body onload="init()" oncontextmenu="console.log('menu');event.preventDefault();">
+    <button ondblclick="test()" onclick="console.log('click')">A</button>
+    <button onclick="kl(this);console.log(this)">B1</button>
+    <button onclick="kl(this);console.log(this)">B2</button>
+    <button onclick="kl(this);console.log(this)">B3</button>
+    <button class="test">XA</button>
+    <button class="test">XB</button>
+    <button class="test">XC</button>
+    <script>
+        console.log("body", document.body)
+    </script>
+    <div id="outer">
+        OUTER
+        <div id="inner">INNER</div>
+    </div>
+</body>
+
+</html>
+
+
+COMMENT DO PROJEKTU:
+zmienic handling odliczania czasu
+now
+Różnica timestamp - now
