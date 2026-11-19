@@ -59,13 +59,15 @@ function init() {
     const mineCount = document.getElementById("mineCount").value;
     const fieldContainer = document.getElementById("fieldContainer");
 
-    let taggedMineCount = 0;
+    let minesLeft = mineCount;
 
     let timeElapsedCounter = 0;
     let timer = "";
 
     const timeSince = document.createElement("h4");
     timeSince.innerText = "Grasz: 0[s]";
+    const minesLeftDisplay = document.createElement("h4");
+    minesLeftDisplay.innerText = `Pozostało bomb: ${minesLeft}`;
 
     fieldContainer.innerHTML = "";
     clearInterval(timer);
@@ -74,6 +76,8 @@ function init() {
       timeElapsedCounter++;
       timeSince.innerText = `Grasz: ${timeElapsedCounter}[s]`;
     }, 1000);
+
+    fieldContainer.append(minesLeftDisplay);
     fieldContainer.append(timeSince);
 
     const mines = randMinePos(fieldHeight, fieldWidth, mineCount);
@@ -88,31 +92,32 @@ function init() {
         this.setAttribute("src", "img/bomb.png");
       } else if (fieldValue == 0) {
         this.parentElement.innerHTML = "";
+        const x = fieldId[1];
+        const y = fieldId[0];
+        console.log(y, x);
       } else {
         this.parentElement.innerHTML = fieldValue;
       }
       this.removeEventListener("click", fieldClick);
+      this.removeEventListener("click", fieldRClick);
     }
     function fieldRClick(ev) {
       // const fieldId = this.parentElement.id.split(";");
       // const fieldValue = table[fieldId[0]][fieldId[1]];
-      let flagState = 0;
-      if (flagState > 3) {
-        flagState = 0;
-      } else {
-        flagState++;
-      }
-      if (flagState == 0) {
-        this.setAttribute("src", "img/klepa.png");
-        taggedMineCount--;
-      } else if (flagState == 1) {
-        this.setAttribute("src", "img/flaga.png");
-        taggedMineCount++;
-      } else {
-        this.setAttribute("src", "img/pyt.png");
-        taggedMineCount--;
-      }
       ev.preventDefault();
+      if (this.getAttribute("src") == "img/klepa.png") {
+        this.setAttribute("src", "img/flaga.png");
+        minesLeft--;
+        this.removeEventListener("click", fieldClick);
+      } else if (this.getAttribute("src") == "img/flaga.png") {
+        this.setAttribute("src", "img/pyt.png");
+        minesLeft++;
+        this.removeEventListener("click", fieldClick);
+      } else {
+        this.setAttribute("src", "img/klepa.png");
+        this.addEventListener("click", fieldClick);
+      }
+      minesLeftDisplay.innerText = `Pozostało bomb: ${minesLeft}`;
     }
 
     for (let r = 0; r < fieldHeight; r++) {
@@ -133,13 +138,13 @@ function init() {
           fieldColumn.style.color = colors[table[r][c] - 1];
         }
         fieldColumn.id = `${r};${c}`;
-        // fieldColumn.innerHTML = table[r][c];
         const fieldImage = document.createElement("img");
         fieldImage.setAttribute("class", "tile");
         fieldImage.setAttribute("src", "img/klepa.png");
         fieldImage.addEventListener("click", fieldClick);
         fieldImage.addEventListener("contextmenu", fieldRClick);
         fieldColumn.append(fieldImage);
+        // fieldColumn.innerHTML = table[r][c];
         fieldRow.append(fieldColumn);
       }
       fieldBody.append(fieldRow);
