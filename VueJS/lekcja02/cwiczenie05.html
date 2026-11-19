@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <a v-bind:href="onet_url">ONET
+    </div>
+      <script>
+        Vue.createApp({
+          data() {
+            return {
+              onet_url: "http://onet.pl",
+              img_width: 200,
+              img_height: 100,
+              img_src: "gfx/google.png",
+            };
+          },
+        }).mount("#app");
+      </script>
+  </body>
+</html>

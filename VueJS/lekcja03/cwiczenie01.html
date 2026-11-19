@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h2>Część 1: Iteracja po tablicach (v-for)</h2>
+      <h3>Pętla po prostych tablicach:</h3>
+      <ul>
+        <li v-for="item in array">{{ item }}</li>
+      </ul>
+      <h3>Tablica z indeksem (item, i):</h3>
+      <ul>
+        <li v-for="(item, i) in array2">{{ i }}: {{ item }}</li>
+      </ul>
+      <h3>Pętla po tablicy obiektów:</h3>
+      <ul>
+        <li v-for="(item, i) in arrayObjects">
+          {{ i }}: przedmiot: {{ item.subject }}, ocena: {{ item.grade }}
+        </li>
+      </ul>
+      <h2>Część 2: Iteracja po obiektach (v-for)</h2>
+      <h3>ul 1 - value key object</h3>
+      <ul>
+        <li v-for="(val, key) in object">{{ key }}: {{ val }}</li>
+      </ul>
+      <h3>ul 2 - key value index obiektu</h3>
+      <ul>
+        <li v-for="(val, key, i) in object">{{ i }} - {{ key }}: {{ val }}</li>
+      </ul>
+    </div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            array: ["Vue.js", "Node.js", "Express.js"],
+            array2: ["JavaScript", "TypeScript", "Kotlin", "Java"],
+            arrayObjects: [
+              { subject: "INF.03", grade: 5 },
+              { subject: "INF.04", grade: 6 },
+              { subject: "Bazy danych", grade: 5 },
+            ],
+            object: {
+              host: "localhost",
+              port: 3000,
+              db: "PostgreSQL",
+            },
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

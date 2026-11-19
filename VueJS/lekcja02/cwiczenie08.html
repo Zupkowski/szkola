@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <div
+        :style="{fontSize: fontSize + 'px', color: textColor, background: bgColor}"
+      >
+        TEST
+      </div>
+      <h1>Sterowanie stylami</h1>
+      <p>Rozmiar czcionki: {{fontSize}}px</p>
+      <input type="range" v-model="fontSize" min="20" max="100" /><br />
+      <p>Kolor tła: {{bgColor}}</p>
+      <br />
+      <input type="color" v-model="bgColor" />
+      <p>Kolor tekstu: {{textColor}}</p>
+      <input type="color" v-model="textColor" /><br />
+    </div>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            fontSize: 16,
+            textColor: "#ffff00",
+            bgColor: "#0000ff",
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

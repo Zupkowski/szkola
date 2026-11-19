@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h2>Komunikat z pola txt: {{ message }}</h2>
+
+      <input v-model="message" type="text" />
+
+      <h5>Wybrane z selecta: {{ selected }}</h5>
+
+      <select v-model="selected">
+        <option>aaa</option>
+        <option>bbb</option>
+        <option>ccc</option>
+      </select>
+    </div>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            message: "zawartość pola txt",
+            selected: "",
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

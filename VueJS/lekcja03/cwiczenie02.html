@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h2>Aktualny stan konta:</h2>
+      <li>Klient: {{account.name}}</li>
+      <li>Punkty lojalnościowe: {{account.points}}</li>
+      <li>Aktualny rabat: {{account.disc}}%</li>
+      <h2>Wyniki wywołania funkcji (widok):</h2>
+      <li>
+        Wartość zakupów po rabacie (dla 200 PLN): {{getDiscPrice(account.disc,
+        200)}} PLN
+      </li>
+      <li>Status: {{checkAccStatus(account.points)}}</li>
+    </div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            account: {
+              name: "Anna Nowak",
+              points: 170,
+              disc: 15,
+            },
+          };
+        },
+        methods: {
+          getDiscPrice(disc, price) {
+            return price - (price * disc) / 100;
+          },
+          checkAccStatus(points) {
+            return points < 200
+              ? `Konto Standard (brakuje ${200 - points} pkt do VIP)`
+              : "Konto VIP (darmowa dostawa)";
+          },
+          addPoints(amount) {
+            this.account.points += amount;
+            return (
+              "Dodano " + amount + " pkt. Nowe punkty: " + this.account.points
+            );
+          },
+          applyDiscount(amount) {
+            this.account.disc = amount;
+            return "Zmieniono rabat na: " + amount + "%";
+          },
+          setClientName(newname) {
+            this.account.name = newname;
+            return "Zmieniono klienta na: " + newname;
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
