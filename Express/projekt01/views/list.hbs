@@ -1,0 +1,28 @@
+<h3 class="page-title">list cars page</h3>
+<div class="page_cont">
+  <table class="list-table">
+    <tr>
+      <th>_id</th>
+      <th>model</th>
+      <th>ubezpieczony</th>
+      <th>benzyna</th>
+      <th>uszkodzony</th>
+      <th>naped4x4</th>
+      <th></th>
+    </tr>
+    {{#each cars}}
+      <tr>
+        <td>{{_id}}</td>
+        <td>{{model}}</td>
+        <td>{{ubezpieczony}}</td>
+        <td>{{benzyna}}</td>
+        <td>{{uszkodzony}}</td>
+        <td>{{naped4x4}}</td>
+        <td><button
+            class="list-btn"
+            onclick="alert(`id: {{_id}}\nmodel: {{model}}\nubezpieczony: {{ubezpieczony}}\nbenzyna: {{benzyna}}\nuszkodzony: {{uszkodzony}}\nnaped4x4: {{naped4x4}}`)"
+          >INFO</button></td>
+      </tr>
+    {{/each}}
+  </table>
+</div>

@@ -50,18 +50,46 @@ app.post("/add", (req, res) => {
     naped4x4: req.body.naped4x4 == "on" ? "TAK" : "NIE",
   };
   db.insert(carObj, function (err, car) {
-    const context = { model: car.model, id: car._id };
+    const context = {
+      message: `new car (Model: ${car.model} with id = ${car._id} added to database`,
+    };
     res.render("add.hbs", context);
   });
 });
 
-// app.get("/list", function (req, res) {
-//   res.render("list.hbs");
-// });
+app.get("/list", function (req, res) {
+  db.find({}, function (err, query) {
+    res.render("list.hbs", { cars: query });
+  });
+});
 
-// app.get("/delete", function (req, res) {
-//   res.render("delete.hbs");
-// });
+app.get("/delete", function (req, res) {
+  db.find({}, function (err, query) {
+    res.render("delete.hbs", { cars: query });
+  });
+});
+
+app.post("/deleteAll", function (req, res) {
+  db.remove({}, { multi: true }, function (err, count) {
+    db.find({}, function (err, query) {
+      res.render("delete.hbs", {
+        cars: query,
+        message: `removed ${count} cars`,
+      });
+    });
+  });
+});
+
+app.post("/deleteSelected", function (req, res) {
+  let count = 0;
+  Object.keys(req.body).forEach((e) => {
+    count++;
+    db.remove({ _id: e }, function (err, count) {});
+  });
+  db.find({}, function (err, query) {
+    res.render("delete.hbs", { cars: query, message: `removed ${count} cars` });
+  });
+});
 
 // app.get("/edit", function (req, res) {
 //   res.render("edit.hbs");

@@ -1,9 +1,8 @@
 <h3 class="page-title">add car page</h3>
-<form action="/add" method="post">
-  <div class="add-msg">new car (Model:
-    {{model}}) with id =
-    {{id}}
-    added to database</div>
+<form action="/add" method="post" class="page_cont">
+  {{#if message}}
+    <div class="add-msg">{{message}}</div>
+  {{/if}}
   <label for="ubezpieczony">Ubezpieczony</label>
   <input type="checkbox" name="ubezpieczony" /><br />
   <label for="benzyna">Benzyna</label>

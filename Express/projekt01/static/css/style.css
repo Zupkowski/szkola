@@ -66,10 +66,11 @@ main {
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
+  cursor: pointer;
 }
 
-form {
+.page_cont {
   background: white;
   box-shadow: 0.1rem 0.1rem 0.4rem lightgrey;
   padding: 1.25rem 1rem;
@@ -82,4 +83,36 @@ form {
   border-radius: 0.5em;
   margin-bottom: 1rem;
   margin-top: 0.25rem;
+}
+
+.list-table {
+  width: 100%;
+  border-spacing: 0;
+}
+.list-table td {
+  padding: 5px 20px;
+  vertical-align: baseline;
+}
+.list-table th {
+  color: white;
+  text-align: left;
+  background: var(--main-blue);
+  padding: 20px 20px;
+}
+
+.list-table th:first-of-type {
+  border-top-left-radius: 10px;
+}
+.list-table th:last-of-type {
+  border-top-right-radius: 10px;
+}
+
+.list-btn {
+  background: var(--main-blue);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  margin-top: 0.75rem;
+  cursor: pointer;
 }

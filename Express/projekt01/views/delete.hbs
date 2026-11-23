@@ -1,0 +1,39 @@
+<h3 class="page-title">delete cars page</h3>
+<div class="page_cont">
+  <form method="post">
+    <button class="list-btn" formaction="/deleteAll">DELETE ALL CARS</button>
+    <button class="list-btn" formaction="/deleteSelected">DELETE SELECTED</button>
+    {{#if message}}
+      <div class="add-msg">{{message}}</div>
+    {{/if}}
+    <table class="list-table">
+      <tr>
+        <th>_id</th>
+        <th>model</th>
+        <th>ubezpieczony</th>
+        <th>benzyna</th>
+        <th>uszkodzony</th>
+        <th>naped4x4</th>
+        <th></th>
+        <th></th>
+      </tr>
+      {{#each cars}}
+        <tr>
+          <td>{{_id}}</td>
+          <td>{{model}}</td>
+          <td>{{ubezpieczony}}</td>
+          <td>{{benzyna}}</td>
+          <td>{{uszkodzony}}</td>
+          <td>{{naped4x4}}</td>
+          <td><button
+              class="list-btn"
+              name="{{_id}}"
+              formaction="/deleteBtn"
+            >DELETE</button></td>
+          <td><input type="checkbox" name="{{_id}}" /></td>
+        </tr>
+
+      {{/each}}
+    </table>
+  </form>
+</div>
