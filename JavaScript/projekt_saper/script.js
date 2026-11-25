@@ -91,9 +91,23 @@ function init() {
       if (fieldValue == "M") {
         this.setAttribute("src", "img/bomb.png");
       } else if (fieldValue == 0) {
-        this.parentElement.innerHTML = "";
-        const x = fieldId[1];
-        const y = fieldId[0];
+        const x = parseInt(fieldId[1]);
+        const y = parseInt(fieldId[0]);
+        for (let v = -1; v < 2; v++) {
+          for (let h = -1; h < 2; h++) {
+            const row = y + v;
+            const col = x + h;
+            if (
+              row < 0 ||
+              row > table.length - 1 ||
+              col < 0 ||
+              col > table[0].length - 1
+            )
+              continue;
+            if (table[row][col] == 0)
+              document.getElementById(`${row};${col}`).innerHTML = "";
+          }
+        }
         console.log(y, x);
       } else {
         this.parentElement.innerHTML = fieldValue;
