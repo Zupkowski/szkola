@@ -60,65 +60,49 @@ function init() {
     const fieldContainer = document.getElementById("fieldContainer");
 
     let minesLeft = mineCount;
-
-    let timeElapsedCounter = 0;
-    let timer = "";
-
-    const timeSince = document.createElement("h4");
-    timeSince.innerText = "Grasz: 0[s]";
     const minesLeftDisplay = document.createElement("h4");
     minesLeftDisplay.innerText = `Pozostało bomb: ${minesLeft}`;
-
     fieldContainer.innerHTML = "";
-    clearInterval(timer);
-
-    timer = setInterval(() => {
-      timeElapsedCounter++;
-      timeSince.innerText = `Grasz: ${timeElapsedCounter}[s]`;
-    }, 1000);
-
     fieldContainer.append(minesLeftDisplay);
-    fieldContainer.append(timeSince);
 
     const mines = randMinePos(fieldHeight, fieldWidth, mineCount);
     const table = createMineField(fieldHeight, fieldWidth, mines);
 
     const fieldBody = document.createElement("table");
 
-    function fieldClick() {
-      const fieldId = this.parentElement.id.split(";");
-      const fieldValue = table[fieldId[0]][fieldId[1]];
-      if (fieldValue == "M") {
-        this.setAttribute("src", "img/bomb.png");
-      } else if (fieldValue == 0) {
-        const x = parseInt(fieldId[1]);
-        const y = parseInt(fieldId[0]);
-        for (let v = -1; v < 2; v++) {
-          for (let h = -1; h < 2; h++) {
-            const row = y + v;
-            const col = x + h;
-            if (
-              row < 0 ||
-              row > table.length - 1 ||
-              col < 0 ||
-              col > table[0].length - 1
-            )
-              continue;
-            if (table[row][col] == 0)
-              document.getElementById(`${row};${col}`).innerHTML = "";
+    function fieldClick(field) {
+      const x = parseInt(field.id.split("_")[1]);
+      const y = parseInt(field.id.split("_")[0]);
+
+      if (!field.classList.contains("clicked")) {
+        if (table[y][x] == "M") {
+          field.children[0].setAttribute("src", "img/bomb.png");
+        } else if (table[y][x] == 0) {
+          for (let v = -1; v < 2; v++) {
+            for (let h = -1; h < 2; h++) {
+              const row = y + v;
+              const col = x + h;
+              if (
+                row < 0 ||
+                row > table.length - 1 ||
+                col < 0 ||
+                col > table[0].length - 1
+              )
+                continue;
+              field.classList.add("clicked");
+              fieldClick(document.getElementById(`${row}_${col}`));
+              field.innerHTML = "";
+            }
           }
+        } else {
+          field.innerHTML = table[y][x];
         }
-        console.log(y, x);
-      } else {
-        this.parentElement.innerHTML = fieldValue;
+        field.classList.add("clicked");
       }
-      this.removeEventListener("click", fieldClick);
-      this.removeEventListener("click", fieldRClick);
     }
-    function fieldRClick(ev) {
+    function fieldRClick(field) {
       // const fieldId = this.parentElement.id.split(";");
       // const fieldValue = table[fieldId[0]][fieldId[1]];
-      ev.preventDefault();
       if (this.getAttribute("src") == "img/klepa.png") {
         this.setAttribute("src", "img/flaga.png");
         minesLeft--;
@@ -151,12 +135,19 @@ function init() {
         if (table[r][c] != "M") {
           fieldColumn.style.color = colors[table[r][c] - 1];
         }
-        fieldColumn.id = `${r};${c}`;
+        fieldColumn.id = `${r}_${c}`;
+
         const fieldImage = document.createElement("img");
         fieldImage.setAttribute("class", "tile");
         fieldImage.setAttribute("src", "img/klepa.png");
-        fieldImage.addEventListener("click", fieldClick);
-        fieldImage.addEventListener("contextmenu", fieldRClick);
+
+        fieldImage.addEventListener("click", () => {
+          fieldClick(fieldColumn);
+        });
+        fieldImage.addEventListener("contextmenu", (ev) => {
+          ev.preventDefault();
+          fieldRClick(fieldColumn);
+        });
         fieldColumn.append(fieldImage);
         // fieldColumn.innerHTML = table[r][c];
         fieldRow.append(fieldColumn);
