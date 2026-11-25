@@ -87,7 +87,7 @@ date_default_timezone_set('Europe/Warsaw');
 $time1 = new DateTime('2026-10-07 21:15:42');
 $time2 = new DateTime('2026-10-07 21:15:42');
 $time1->setTime(00, 00, 00);
-$time2->setTime(23,59,59);
+$time2->setTime(23, 59, 59);
 echo $time1->format('Y-m-d H:i:s');
 echo "<br>";
 echo $time2->format('Y-m-d H:i:s');
@@ -117,4 +117,39 @@ $data = new DateTime('2020-01-01');
 $data->setTimestamp(1791400542);
 echo $data->format('Y-m-d H:i:s');
 ?><br>
-
+<u><b>ZAD15</b></u><br>
+<?php
+date_default_timezone_set('Europe/Warsaw');
+$od = new DateTime('2026-10-07 21:15:42');
+$do = new DateTime('2026-11-20 18:00:00');
+$roznica = $od->diff($do);
+echo $roznica->format('%a');
+echo "<br>";
+echo $roznica->format('%h:%i:%s');
+?><br>
+<u><b>ZAD16</b></u><br>
+<?php
+$fmt = new IntlDateFormatter('pl_PL', IntlDateFormatter::FULL, IntlDateFormatter::NONE, 'Europe/Warsaw');
+echo $fmt->format(1791400542);
+?><br>
+<u><b>ZAD17</b></u><br>
+<?php
+$fmt = new IntlDateFormatter('pl_PL', IntlDateFormatter::LONG, IntlDateFormatter::SHORT, 'Europe/Warsaw');
+echo $fmt->format(1791400542);
+echo "<br>";
+$fmt = new IntlDateFormatter('en_US', IntlDateFormatter::LONG, IntlDateFormatter::SHORT, 'Europe/Warsaw');
+echo $fmt->format(1791400542);
+echo "<br>";
+$fmt = new IntlDateFormatter('de_DE', IntlDateFormatter::LONG, IntlDateFormatter::SHORT, 'Europe/Warsaw');
+echo $fmt->format(1791400542);
+?><br>
+<u><b>ZAD18</b></u><br>
+<?php
+$fmt = new IntlDateFormatter('pl_PL', IntlDateFormatter::LONG, IntlDateFormatter::SHORT, 'Europe/Warsaw');
+$fmt->setPattern('EEEE, d MMMM yyyy');
+echo $fmt->format(1791400542);
+echo "<br>";
+$fmt = new IntlDateFormatter('en_US', IntlDateFormatter::LONG, IntlDateFormatter::SHORT, 'Europe/Warsaw');
+$fmt->setPattern('EEEE, d MMMM yyyy');
+echo $fmt->format(1791400542);
+?><br>
