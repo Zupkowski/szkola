@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function formatDateToText(dateObject) {
+        return dateObject.toDateString();
+      }
+      function getCurrentPeriod(dateObject) {
+        return [dateObject.getFullYear(), dateObject.getMonth()];
+      }
+      function isWeekend(dateObject) {
+        return [0, 6].includes(dateObject.getDay());
+      }
+      function createChristmas2026() {
+        return new Date(2026, 12, 24, 15, 30, 0);
+      }
+      function getTimestampWithNewDate(date) {
+        let data = new Date(date);
+        return data.getTime();
+      }
+      function getTimestampWithParse(date) {
+        return Date.parse(date);
+      }
+      function setAsMidnight(date) {
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+      }
+      function hasExpired(exp, today) {
+        return today > exp ? true : false;
+      }
+      function measureLoop() {
+        let startTime = Date.now();
+        for (let i = 0; i < 10000000; i++) {}
+        let stopTime = Date.now();
+        let difference = stopTime - startTime;
+        return "Operacja trwała: " + difference + "ms";
+      }
+      function addDays(dateObject, days) {
+        return dateObject.setDate(dateObject.getDate() + days);
+      }
+      function daysUntilNewYear(currentDate) {
+        let newYears = new Date(
+          `${currentDate.getFullYear() + 1}-01-01`,
+        ).getTime();
+
+        return Math.floor((newYears - currentDate.getTime()) / 86400000);
+      }
+      console.log(daysUntilNewYear(new Date("2026-12-25")));
+    </script>
+  </body>
+</html>
