@@ -54,6 +54,12 @@
             this.account.name = newname;
             return "Zmieniono klienta na: " + newname;
           },
+          resetAccount() {
+            this.account.name = "Anna Nowak";
+            this.account.points = 170;
+            this.account.disc = 15;
+            return "Zresetowano konto.";
+          },
         },
       }).mount("#app");
     </script>

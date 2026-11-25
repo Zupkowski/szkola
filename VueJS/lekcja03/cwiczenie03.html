@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <div>
+        <h2>Lista produktów ({{products.length}} szt.)</h2>
+        <ul>
+          <li v-for="(product) in products">
+            {{product.name}} (ID: {{product.id}}) | Cena: {{product.cena}} |
+            Kategoria: {{product.category}}
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h2>Operacje na danych:</h2>
+        <h3>1. Produkty premium (Cena > 50 zł) - filter()</h3>
+        <ul>
+          <li v-for="(premium) in getPremiumProducts(50)">
+            {{premium.name}} - {{premium.price}} zł
+          </li>
+        </ul>
+        Łączna liczba produktów Premium: {{getPremiumProducts(50).length}}
+        <h3>2. Lista nazw i zmodyfikowanych cen (obniżka 10%) - map():</h3>
+        <ul>
+          <li v-for="(mapped) in getMappedPrices(2)">
+            {{mapped.name}} | Nowa cena: {{mapped.price}} zł
+          </li>
+        </ul>
+        <h3>3. Całkowita wartość magazynu (Suma cen) - reduce():</h3>
+        Całkowity koszt wszystkich produktów: {{getTotalValue()}} zł
+      </div>
+    </div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            products: [
+              {
+                id: 1,
+                name: "Książka 'VueJS'",
+                price: 35.99,
+                category: "Książki",
+              },
+              {
+                id: 2,
+                name: "Słuchawki Pro",
+                price: 129.99,
+                category: "Elektronika",
+              },
+              {
+                id: 3,
+                name: "Myszka bezprzewodowa",
+                price: 49.5,
+                category: "Elektronika",
+              },
+              { id: 4, name: "Zeszyt A4", price: 8.0, category: "Artykuły" },
+              {
+                id: 5,
+                name: "Monitor 4K",
+                price: 999.0,
+                category: "Elektronika",
+              },
+            ],
+          };
+        },
+        methods: {
+          getPremiumProducts(minPrice) {
+            return this.products.filter((a) => a.price > minPrice);
+          },
+          getMappedPrices(multiplier) {
+            return this.products.filter((a) => a.price * multiplier);
+          },
+          getTotalValue() {
+            return this.products.reduce((count, a) => count + a.price, 0);
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
