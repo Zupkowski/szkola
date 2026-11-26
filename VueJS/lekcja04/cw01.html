@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style></style>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>cw 01 - kliknij w diva</h3>
+      <div @click="divClick">CLICK ME!</div>
+      <h3>cw 02 - wartosc (value) z selecta</h3>
+      <select @change="onChange">
+        <option>option 1</option>
+        <option>option 2</option>
+        <option>option 3</option>
+      </select>
+      {{selected}}
+      <h3>cw 03 - wartosc (value) z range</h3>
+      <input type="range" v-on:input="onInput" min="0" max="100" />
+      {{range}}
+      <h3>cw 04 - wartosc (value) z checkboxa</h3>
+      <input type="checkbox" @change="onCheckbox" />
+      {{check}}
+      <h3>cw 05 - klik buttona</h3>
+      <button @click="buttonAdd">button 1 - powieksza wartosc licznika</button>
+      {{counter}}
+      <h3>cw 06 - klik buttona</h3>
+      <button @click="buttonPower">
+        button 2 - liczy 2 do potegi licznika
+      </button>
+      {{number}}
+    </div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            selected: "option 1",
+            range: 50,
+            check: false,
+            counter: 0,
+            power: 0,
+            number: 1,
+          };
+        },
+        methods: {
+          divClick() {
+            alert("STOP TOUCHING ME!!!");
+          },
+          onChange(s) {
+            this.selected = s.target.value;
+          },
+          onInput(i) {
+            this.range = i.target.value;
+          },
+          onCheckbox(c) {
+            this.check = c.target.checked;
+          },
+          buttonAdd() {
+            this.counter++;
+          },
+          buttonPower() {
+            this.power++;
+            this.number = 2 ** this.power;
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

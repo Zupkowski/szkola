@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      .old {
+        background: slategray;
+        color: black;
+      }
+      .new {
+        color: white;
+        background: green;
+      }
+      img {
+        width: 250px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <div v-for="(car) in samochody" :class="getClass(car)">
+        {{getCar(car)}}
+        <a :href="getLink(car)">
+          <img v-bind:src="getImage(car)" />
+        </a>
+      </div>
+    </div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            samochody: [
+              {
+                id: 1,
+                type: "Mercedes",
+                model: "Benz",
+                year: 1963,
+                url: "https://www.mercedes-benz.com",
+              },
+              {
+                id: 2,
+                type: "Renault",
+                model: "Gordini",
+                year: 1976,
+                url: "https://www.renault.com",
+              },
+              {
+                id: 3,
+                type: "Toyota",
+                model: "Prius",
+                year: 2026,
+                url: "https://www.toyota.com",
+              },
+              {
+                id: 4,
+                type: "Tesla",
+                model: "Model S",
+                year: 2023,
+                url: "https://www.tesla.com",
+              },
+              {
+                id: 5,
+                type: "Peugeot",
+                model: "508",
+                year: 2016,
+                url: "https://www.peugeot.com",
+              },
+            ],
+          };
+        },
+        methods: {
+          getCar(objectCar) {
+            return (
+              objectCar.type + "-" + objectCar.model + "-" + objectCar.year
+            );
+          },
+          getLink(objectCar) {
+            return objectCar.url;
+          },
+          getImage(objectCar) {
+            return "gfx/" + objectCar.type + ".jpg";
+          },
+          getClass(objectCar) {
+            return objectCar.year < 2000 ? "old" : "new";
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
