@@ -91,6 +91,13 @@ app.post("/deleteSelected", function (req, res) {
   });
 });
 
+app.post("/deleteBtn", function (req, res) {
+  db.remove({ _id: Object.keys(req.body)[0] }, function (err, count) {});
+  db.find({}, function (err, query) {
+    res.render("delete.hbs", { cars: query, message: `removed 1 car` });
+  });
+});
+
 // app.get("/edit", function (req, res) {
 //   res.render("edit.hbs");
 // });
